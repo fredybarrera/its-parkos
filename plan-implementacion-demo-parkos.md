@@ -15,7 +15,7 @@ Demo SPA funcional para vender la solución de gestión de estacionamientos por 
 
 ## Stack recomendado
 
-- **Nuxt 3** (Vue 3 + Composition API + `<script setup>`)
+- **Nuxt 4** (Vue 3 + Composition API + `<script setup>`)
 - **TypeScript** (el modelo de dominio tipado es lo que se reutiliza después)
 - **Pinia** para estado
 - **Tailwind CSS** para estilos (rápido para un demo; alternativa: UnoCSS)
@@ -30,42 +30,47 @@ Demo SPA funcional para vender la solución de gestión de estacionamientos por 
 
 ```
 parkos-demo/
-├── app.vue
-├── layouts/
-│   └── default.vue            # El shell: topbar + sidebar
-├── pages/
-│   ├── index.vue              # redirige a /operacion
-│   ├── operacion.vue
-│   ├── plazas.vue
-│   ├── tarifas.vue
-│   ├── abonados.vue
-│   └── reportes.vue
-├── components/
-│   ├── shell/
-│   │   ├── PlanToggle.vue
-│   │   ├── SidebarNav.vue
-│   │   └── TopBar.vue
-│   ├── operacion/
-│   │   ├── SesionesTable.vue
-│   │   ├── IngresoManualForm.vue
-│   │   ├── AccesoAutomaticoPanel.vue   # cámara + barrera (Control)
-│   │   └── ComprobanteModal.vue
-│   ├── plazas/
-│   │   └── PlazasGrid.vue
-│   └── common/
-│       └── FeatureLock.vue    # candado "Disponible en plan Control"
-├── composables/
-│   ├── useEntitlements.ts     # has() / getLimit() / plan activo
-│   └── useParkingData.ts      # interfaz de datos (mock hoy, API mañana)
-├── stores/
-│   ├── plan.ts                # plan activo + catálogo de planes
-│   └── parking.ts             # sesiones, plazas, abonados, tarifas
-├── domain/
-│   ├── features.ts            # catálogo de funcionalidades (códigos)
-│   ├── plans.ts               # mapeo plan → funcionalidades
-│   └── types.ts               # Sesion, Plaza, Abonado, Tarifa...
-└── mocks/
-    └── seed.ts                # datos semilla creíbles
+├── nuxt.config.ts
+├── package.json
+├── tsconfig.json
+├── public/
+└── app/                       # srcDir de Nuxt 4 (los alias ~ y @ apuntan aquí)
+    ├── app.vue
+    ├── layouts/
+    │   └── default.vue            # El shell: topbar + sidebar
+    ├── pages/
+    │   ├── index.vue              # redirige a /operacion
+    │   ├── operacion.vue
+    │   ├── plazas.vue
+    │   ├── tarifas.vue
+    │   ├── abonados.vue
+    │   └── reportes.vue
+    ├── components/
+    │   ├── shell/
+    │   │   ├── PlanToggle.vue
+    │   │   ├── SidebarNav.vue
+    │   │   └── TopBar.vue
+    │   ├── operacion/
+    │   │   ├── SesionesTable.vue
+    │   │   ├── IngresoManualForm.vue
+    │   │   ├── AccesoAutomaticoPanel.vue   # cámara + barrera (Control)
+    │   │   └── ComprobanteModal.vue
+    │   ├── plazas/
+    │   │   └── PlazasGrid.vue
+    │   └── common/
+    │       └── FeatureLock.vue    # candado "Disponible en plan Control"
+    ├── composables/
+    │   ├── useEntitlements.ts     # has() / getLimit() / plan activo
+    │   └── useParkingData.ts      # interfaz de datos (mock hoy, API mañana)
+    ├── stores/
+    │   ├── plan.ts                # plan activo + catálogo de planes
+    │   └── parking.ts             # sesiones, plazas, abonados, tarifas
+    ├── domain/
+    │   ├── features.ts            # catálogo de funcionalidades (códigos)
+    │   ├── plans.ts               # mapeo plan → funcionalidades
+    │   └── types.ts               # Sesion, Plaza, Abonado, Tarifa...
+    └── mocks/
+        └── seed.ts                # datos semilla creíbles
 ```
 
 ---
@@ -81,7 +86,7 @@ Cada etapa es un bloque cerrado: se construye, se prueba a ojo, se commitea, se 
 **Objetivo:** proyecto Nuxt corriendo, en blanco pero navegable.
 
 Pasos:
-1. Inicializar proyecto Nuxt 3 con TypeScript.
+1. Inicializar proyecto Nuxt 4 con TypeScript.
 2. Agregar y configurar Pinia, Tailwind y VueUse como módulos.
 3. Crear las páginas vacías (las 5 + index que redirige a `/operacion`).
 4. Verificar que `npm run dev` levanta y se puede navegar entre rutas con la URL.
