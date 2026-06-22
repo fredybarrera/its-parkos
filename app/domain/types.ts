@@ -60,3 +60,88 @@ export interface Plan {
   toggles: Record<ToggleCode, boolean>
   limits: Record<LimitCode, LimitValue>
 }
+
+// ─────────────────────────────────────────────────────────────────────────
+// Dominio de parking (Etapa 3). Tipos del negocio real: lo que sobrevive
+// cuando el mock se reemplace por una API.
+// ─────────────────────────────────────────────────────────────────────────
+
+export type SesionEstado = 'activa' | 'cerrada'
+export type SesionOrigen = 'manual' | 'lpr'
+
+/** Un vehículo dentro del estacionamiento, desde que entra hasta que paga y sale. */
+export interface Sesion {
+  id: string
+  patente: string
+  horaEntrada: string
+  horaSalida: string | null
+  estado: SesionEstado
+  origen: SesionOrigen
+  /** Se calcula al cerrar (registrarSalida); null mientras la sesión está activa. */
+  monto: number | null
+}
+
+export type PlazaEstado = 'libre' | 'ocupada'
+
+/** Una posición física numerada de la grilla del estacionamiento. */
+export interface Plaza {
+  id: string
+  codigo: string
+  estado: PlazaEstado
+  /** Sesión que la ocupa, si la ocupación viene de un ingreso registrado. */
+  sesionId: string | null
+}
+
+export type AbonadoEstado = 'activo' | 'inactivo'
+
+/** Cliente con convenio mensual (no paga por sesión individual). */
+export interface Abonado {
+  id: string
+  nombre: string
+  patente: string
+  estado: AbonadoEstado
+  vigenteHasta: string
+}
+
+/** Tipo de cobro que define una Tarifa. Deja espacio a 'plana' sin forzarlo. */
+export type TarifaTipo = 'hora_fraccion' | 'plana'
+
+/** Modelo de cobro vigente. Un solo objeto activo a la vez (ver useParkingData). */
+export interface Tarifa {
+  id: string
+  tipo: TarifaTipo
+  /** CLP por hora completa. Usado cuando tipo === 'hora_fraccion'. */
+  valorHora: number
+  /** Tamaño de la fracción de cobro en minutos (ej. 15 = cobra cada 15 min iniciados). */
+  fraccionMinutos: number
+  /** CLP fijos por estadía. Usado cuando tipo === 'plana'; null si no aplica. */
+  valorPlano: number | null
+}
+
+/** Recibo emitido al cerrar una sesión (registrarSalida). */
+export interface Comprobante {
+  id: string
+  sesionId: string
+  patente: string
+  tiempoTotalMinutos: number
+  monto: number
+  fecha: string
+}
+
+/** Métrica de un punto en el día, para identificar horas pico en ReporteDia. */
+export interface HoraPico {
+  hora: number
+  vehiculos: number
+}
+
+/** Resumen del día para la pantalla de Reportes (Etapa 6). */
+export interface ReporteDia {
+  fecha: string
+  ingresosTotales: number
+  vehiculosAtendidos: number
+  /** Sesiones por plaza en el día: a mayor número, más rotación. */
+  rotacion: number
+  /** Porcentaje (0-100) de plazas ocupadas en el momento del cálculo. */
+  ocupacionPromedio: number
+  horasPico: HoraPico[]
+}
