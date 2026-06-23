@@ -189,7 +189,7 @@ Checklist:
 
 ---
 
-## Etapa 5 — Pantalla Mapa de plazas
+## Etapa 5 — Pantalla Mapa de estacionamientos
 
 **Objetivo:** la otra pantalla con coreografía. Grilla idéntica en ambos planes; cambia quién la actualiza.
 

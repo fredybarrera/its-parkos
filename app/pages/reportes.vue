@@ -57,7 +57,7 @@ const comparativaOrigen = computed(() => {
       </div>
 
       <div class="rounded-xl border border-slate-200 bg-white p-6">
-        <h2 class="text-sm font-semibold text-slate-700">Horas pico</h2>
+        <h2 class="text-sm font-semibold text-slate-700">Horas punta</h2>
         <div class="mt-4">
           <ReportesHorasPicoChart :horas-pico="reporte.horasPico" />
         </div>

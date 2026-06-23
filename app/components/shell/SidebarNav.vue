@@ -21,7 +21,7 @@ interface NavItem {
 // Núcleo: visible y navegable en ambos planes.
 const coreItems: NavItem[] = [
   { label: 'Operación en vivo', to: '/operacion' },
-  { label: 'Mapa de plazas', to: '/plazas' },
+  { label: 'Mapa de estacionamientos', to: '/plazas' },
   { label: 'Tarifas', to: '/tarifas' },
   { label: 'Abonados', to: '/abonados' },
   { label: 'Reportes', to: '/reportes' },
