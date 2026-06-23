@@ -253,6 +253,54 @@ Checklist:
 
 ---
 
+## Etapa 8 — Diseño responsivo (móvil)
+
+**Objetivo:** que el shell y todas las pantallas se vean y se usen correctamente en dispositivos móviles (320–414px de ancho), sin perder usabilidad en desktop. El demo se muestra a veces desde un celular o tablet, no solo desde notebook.
+
+Pasos:
+1. `composables/useSidebar.ts` (nuevo): estado global (`abierto` / `abrir` / `cerrar` / `toggle`) para el drawer del sidebar en móvil.
+2. `layouts/default.vue`: el `<aside>` pasa a ser estático solo desde `lg:`; por debajo de `lg:` se monta un drawer deslizante con backdrop oscuro (cierra con click afuera, tecla Escape, o al navegar). Se conecta con `useDemoSpotlight()` para que, si el recorrido guiado resalta los candados del sidebar, el drawer se abra solo y siga siendo visible en móvil. Padding del `<main>` responsivo (`p-4 sm:p-6 lg:p-8`).
+3. `TopBar.vue`: botón hamburguesa nuevo (visible solo `<lg`), paddings/gaps comprimidos para que logo + `PlanToggle` + controles de demo + avatar entren sin desbordar incluso a 320px.
+4. `PlanToggle.vue` / `DemoControls.vue`: tamaños reducidos en móvil — el toggle de plan (herramienta de venta) se mantiene siempre visible, pero más angosto; el botón "Iniciar recorrido" oculta su texto y deja solo el ícono en pantallas chicas.
+5. `SidebarNav.vue`: emite `navigate` en cada link para que el layout cierre el drawer al elegir una sección.
+6. `DemoBanner.vue`: `flex-wrap` + `min-w-0` en el label del paso actual para que no desborde ni se corte mal en pantallas angostas.
+7. Encabezados de página (`operacion`, `plazas`, `abonados`), tablas (`SesionesTable`, `AbonadosTable`), formularios inline (`IngresoManualForm`, `AgregarAbonadoForm`), `AccesoAutomaticoPanel`, y grids de `reportes`/`tarifas`: `flex-wrap`, `overflow-x-auto` y columnas que pasan a una sola en móvil.
+
+Checklist:
+- [x] Sin overflow horizontal en ninguna pantalla a 320px ni 375px de ancho
+- [x] El sidebar se vuelve drawer en móvil, con backdrop, y cierra por click afuera / Escape / navegación
+- [x] El TopBar no desborda en pantallas angostas (hamburguesa, logo, PlanToggle, controles, avatar)
+- [x] Las tablas con muchas columnas permiten scroll horizontal interno sin romper el layout de la página
+- [x] Los formularios inline (Registrar ingreso, Agregar abonado) no cortan botones en móvil
+- [x] Desktop (`≥lg`) sin regresiones: sidebar estático, sin hamburguesa, TopBar igual que antes
+- [x] Verificado con Playwright en 320×568, 375×812 y 1440×900 (capturas + chequeo de `scrollWidth`)
+- [x] Commit: `feat: diseño responsivo del shell y pantallas para móvil` (PR #1, mergeado a `main`)
+
+---
+
+## Etapa 9 — Bitácoras reales: Lectura de patente, Sensores, Barreras
+
+**Objetivo:** los tres ítems gated del sidebar (`lpr.camera`, `occupancy.sensors`, `access.barrier`) llevaban a pantallas en blanco. En vez de inventar mini-features nuevas y desconectadas, cada pantalla pasa a ser una bitácora de **datos reales** que ya genera el resto de la app — sin estado paralelo falso.
+
+Pasos:
+1. `composables/useSensoresSimulados.ts` (nuevo): se extrae la simulación de sensores —antes vivía solo dentro de `pages/plazas.vue` y se detenía si el operador cambiaba de pantalla— a un composable global (`createGlobalState`), instanciado desde `layouts/default.vue`. Mantiene una bitácora de las últimas 20 lecturas (plaza, nuevo estado, hora).
+2. `pages/plazas.vue`: se simplifica para consumir `useSensoresSimulados()` en vez de tener su propio `useIntervalFn` local; mismo comportamiento visual, lógica centralizada.
+3. `pages/sensores.vue`: estado "en vivo · última lectura hace Ns" + métricas (`ReportesMetricCard`) + tabla de bitácora de lecturas, reutilizando `getPlazas()` y la bitácora del composable.
+4. `pages/lpr.vue`: bitácora de lecturas de cámara, filtrando `getSesiones()` por `origen === 'lpr'` (no reinventa la simulación de cámara, que ya vive en `AccesoAutomaticoPanel`).
+5. `pages/barreras.vue`: la misma data de sesiones con `origen === 'lpr'`, presentada como bitácora de aperturas automáticas (cada lectura válida implica que la barrera se levantó).
+6. En las tres, si el plan activo no incluye la funcionalidad, se muestra el mismo bloque de `CommonFeatureLock` que ya usa Reportes avanzados (vende el candado) en vez de una pantalla vacía.
+
+Checklist:
+- [x] `/sensores`, `/lpr` y `/barreras` muestran candados en plan Gestión, no contenido vacío
+- [x] En plan Control, las tres muestran datos reales (seed + cambios en vivo), no mocks paralelos
+- [x] La bitácora de sensores crece con lecturas reales cada ~5s mientras el plan activo es Control
+- [x] `/plazas` sigue funcionando igual que antes tras mover la simulación a `useSensoresSimulados`
+- [x] Las tablas nuevas respetan el mismo patrón responsivo de la Etapa 8 (`overflow-x-auto`, `flex-wrap`)
+- [x] Verificado con Playwright: estado bloqueado/desbloqueado por plan y crecimiento de la bitácora en el tiempo
+- [ ] Commit: `feat: bitácoras reales en lectura de patente, sensores y barreras` (pendiente — cambios en working tree, sin commitear aún)
+
+---
+
 # Cómo trabajar esto con Claude Code
 
 - **Una etapa por sesión/prompt.** Pedí a Claude Code que implemente una etapa completa, no el proyecto entero de una vez. Da contexto de la etapa y su checklist.

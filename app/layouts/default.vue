@@ -6,12 +6,17 @@
   debajo de lg:, controlado por useSidebar(). Se conecta con
   useDemoSpotlight() para que el recorrido guiado siga siendo visible en
   móvil: si resalta los candados del sidebar con el drawer cerrado, lo abre.
+
+  También arranca useSensoresSimulados() acá (no en pages/plazas.vue): son
+  "sensores que están prendidos" según el plan activo, no algo que dependa
+  de qué pantalla esté mirando el operador.
 -->
 <script setup lang="ts">
 import { watch } from 'vue'
 
 const { abierto, cerrar } = useSidebar()
 const { candadosResaltados } = useDemoSpotlight()
+useSensoresSimulados()
 
 watch(candadosResaltados, (activo) => {
   if (activo) abierto.value = true
