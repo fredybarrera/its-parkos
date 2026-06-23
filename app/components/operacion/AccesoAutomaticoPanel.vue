@@ -9,11 +9,16 @@
 
   Quien decide si este panel se monta es la página (gated por
   has('access.barrier')); este componente no pregunta por el plan.
+
+  Se registra en useDemoStage como 'operacion.ingresoAutomatico' para que el
+  modo demo pueda disparar esta misma animación (no una paralela) en su
+  escena de Control.
 -->
 <script setup lang="ts">
-import { onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 const { registrarIngreso } = useParkingData()
+const { registerAction, unregisterAction } = useDemoStage()
 
 type Estado = 'idle' | 'escaneando' | 'barrera' | 'ingresado'
 
@@ -45,6 +50,9 @@ function limpiarTimeout() {
 }
 
 onUnmounted(limpiarTimeout)
+
+onMounted(() => registerAction('operacion.ingresoAutomatico', simularIngreso))
+onUnmounted(() => unregisterAction('operacion.ingresoAutomatico'))
 
 async function simularIngreso() {
   if (estado.value !== 'idle') return

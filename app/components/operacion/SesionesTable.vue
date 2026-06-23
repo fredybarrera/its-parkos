@@ -71,8 +71,16 @@ function origenLabel(origen: Sesion['origen']): string {
           <th class="px-4 py-3 font-medium text-right">Acción</th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-slate-100">
-        <tr v-if="sesionesActivas.length === 0">
+      <TransitionGroup
+        tag="tbody"
+        class="divide-y divide-slate-100"
+        enter-active-class="transition-all duration-300 ease-out"
+        enter-from-class="opacity-0 -translate-y-1"
+        leave-active-class="transition-all duration-200 ease-in"
+        leave-to-class="opacity-0"
+        move-class="transition-transform duration-300 ease-out"
+      >
+        <tr v-if="sesionesActivas.length === 0" key="empty">
           <td :colspan="mostrarOrigen ? 5 : 4" class="px-4 py-6 text-center text-slate-400">
             No hay vehículos dentro del estacionamiento.
           </td>
@@ -99,7 +107,7 @@ function origenLabel(origen: Sesion['origen']): string {
             </button>
           </td>
         </tr>
-      </tbody>
+      </TransitionGroup>
     </table>
   </div>
 </template>

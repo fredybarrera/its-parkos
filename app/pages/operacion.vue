@@ -3,28 +3,14 @@
   (useParkingData.registrarIngreso); solo cambia el disparador (manual vs.
   "hardware" simulado) y el campo origen. Todo el armado condicional se
   decide con has(), nunca con el id de plan.
+
+  El estado de "qué comprobante se está mostrando" vive en useOperacionFlujo
+  (no en un ref local) para que el modo demo pueda disparar exactamente el
+  mismo camino que un click real del operador.
 -->
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { Comprobante } from '~/domain/types'
-
 const { has } = useEntitlements()
-const parkingData = useParkingData()
-
-const comprobanteActivo = ref<{ comprobante: Comprobante; horaEntrada: string } | null>(null)
-
-function onSalida(sesionId: string) {
-  const comprobante = parkingData.registrarSalida(sesionId)
-  const sesion = parkingData.getSesiones().find((s) => s.id === sesionId)
-  comprobanteActivo.value = {
-    comprobante,
-    horaEntrada: sesion?.horaEntrada ?? comprobante.fecha,
-  }
-}
-
-function cerrarComprobante() {
-  comprobanteActivo.value = null
-}
+const { comprobanteActivo, registrarSalida, cerrarComprobante } = useOperacionFlujo()
 </script>
 
 <template>
@@ -36,13 +22,20 @@ function cerrarComprobante() {
 
     <OperacionAccesoAutomaticoPanel v-if="has('access.barrier')" />
 
-    <OperacionSesionesTable @salida="onSalida" />
+    <OperacionSesionesTable @salida="registrarSalida" />
 
-    <OperacionComprobanteModal
-      v-if="comprobanteActivo"
-      :comprobante="comprobanteActivo.comprobante"
-      :hora-entrada="comprobanteActivo.horaEntrada"
-      @cerrar="cerrarComprobante"
-    />
+    <Transition
+      enter-active-class="transition-all duration-200 ease-out"
+      enter-from-class="opacity-0"
+      leave-active-class="transition-all duration-150 ease-in"
+      leave-to-class="opacity-0"
+    >
+      <OperacionComprobanteModal
+        v-if="comprobanteActivo"
+        :comprobante="comprobanteActivo.comprobante"
+        :hora-entrada="comprobanteActivo.horaEntrada"
+        @cerrar="cerrarComprobante"
+      />
+    </Transition>
   </div>
 </template>

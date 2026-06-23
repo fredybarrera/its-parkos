@@ -110,6 +110,15 @@ export const useParkingStore = defineStore('parking', {
       this.tarifa = tarifa
     },
 
+    /** Vuelve sesiones/plazas/abonados/tarifa al estado semilla inicial.
+     *  Útil para repetir el demo con el próximo prospecto sin recargar. */
+    reset() {
+      this.sesiones = structuredClone(SEED_SESIONES)
+      this.plazas = structuredClone(SEED_PLAZAS)
+      this.abonados = structuredClone(SEED_ABONADOS)
+      this.tarifa = structuredClone(SEED_TARIFA)
+    },
+
     getReporteDia(): ReporteDia {
       const cerradas = this.sesiones.filter((s) => s.estado === 'cerrada')
       const ingresosTotales = cerradas.reduce((sum, s) => sum + (s.monto ?? 0), 0)

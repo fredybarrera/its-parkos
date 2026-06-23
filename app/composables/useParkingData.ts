@@ -30,6 +30,8 @@ export interface ParkingDataApi {
   getTarifa(): Tarifa
   setTarifa(tarifa: Tarifa): void
   getReporteDia(): ReporteDia
+  /** Vuelve sesiones/plazas/abonados/tarifa al estado semilla inicial. */
+  reset(): void
 }
 
 export function useParkingData(): ParkingDataApi {
@@ -46,5 +48,6 @@ export function useParkingData(): ParkingDataApi {
     getTarifa: () => store.tarifa,
     setTarifa: (tarifa) => store.setTarifa(tarifa),
     getReporteDia: () => store.getReporteDia(),
+    reset: () => store.reset(),
   }
 }

@@ -23,6 +23,8 @@
 
     <!-- Usuario decorativo (sin auth real) -->
     <div class="flex items-center gap-3">
+      <ShellDemoControls />
+      <div class="h-6 w-px bg-slate-200" />
       <div class="hidden text-right sm:block">
         <p class="text-sm font-medium leading-tight text-slate-700">Carla Méndez</p>
         <p class="text-xs leading-tight text-slate-400">Operadora</p>

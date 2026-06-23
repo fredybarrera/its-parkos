@@ -36,6 +36,7 @@ const gatedItems: NavItem[] = [
 
 const { has } = useEntitlements()
 const route = useRoute()
+const { candadosResaltados } = useDemoSpotlight()
 
 /** Un ítem está desbloqueado si es núcleo o si el plan tiene su funcionalidad. */
 function isUnlocked(item: NavItem): boolean {
@@ -81,7 +82,11 @@ function isActive(item: NavItem): boolean {
         {{ item.label }}
       </NuxtLink>
 
-      <CommonFeatureLock v-else class="rounded-lg px-3 py-2">
+      <CommonFeatureLock
+        v-else
+        class="rounded-lg px-3 py-2 transition-shadow duration-500"
+        :class="candadosResaltados ? 'ring-2 ring-amber-400 ring-offset-2 ring-offset-white' : ''"
+      >
         {{ item.label }}
       </CommonFeatureLock>
     </template>

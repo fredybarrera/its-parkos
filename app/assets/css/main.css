@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Quien pide menos movimiento, lo obtiene: corta animaciones/transiciones
+   (incluye animate-pulse, transition-*, <Transition>) a casi cero sin
+   tener que tocar cada componente uno por uno. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

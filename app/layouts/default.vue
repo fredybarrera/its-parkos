@@ -13,5 +13,7 @@
         <slot />
       </main>
     </div>
+
+    <ShellDemoBanner />
   </div>
 </template>
