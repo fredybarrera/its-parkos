@@ -220,15 +220,15 @@ Checklist:
 Pasos:
 1. **Tarifas:** configurar tarifa (por hora/fracción o plana). Idéntica en ambos planes. Alimenta el cálculo de Operación.
 2. **Abonados:** lista de abonados. Aplicar el **límite** de `subscribers.manage`: en Gestión, al intentar pasar de 50, mostrar "Alcanzaste el límite de tu plan". En Control, ilimitado.
-3. **Reportes:** ingresos del día, rotación, ocupación, horas pico (básicos, ambos planes). Si `has('reports.advanced')`, desbloquear sección extra (por sensor, comparativas).
+3. **Reportes:** ingresos del día, rotación, ocupación, horas punta (básicos, ambos planes). Si `has('reports.advanced')`, desbloquear sección extra (por sensor, comparativas).
 
 Checklist:
-- [ ] Tarifas configurables; el cambio se refleja en el cálculo de cobro
-- [ ] Abonados respeta el límite en Gestión con mensaje claro
-- [ ] Abonados es ilimitado en Control
-- [ ] Reportes básicos visibles en ambos; avanzados solo en Control
-- [ ] Todo gating lee de `useEntitlements`
-- [ ] Commit: `feat: pantallas tarifas, abonados y reportes`
+- [x] Tarifas configurables; el cambio se refleja en el cálculo de cobro
+- [x] Abonados respeta el límite en Gestión con mensaje claro
+- [x] Abonados es ilimitado en Control
+- [x] Reportes básicos visibles en ambos; avanzados solo en Control
+- [x] Todo gating lee de `useEntitlements`
+- [x] Commit: `feat: pantallas tarifas, abonados y reportes`
 
 ---
 
