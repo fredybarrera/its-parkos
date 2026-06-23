@@ -23,7 +23,7 @@ withDefaults(
     <div class="flex items-center justify-between gap-2">
       <span class="min-w-0 flex-1 truncate"><slot /></span>
       <svg
-        class="h-4 w-4 shrink-0 text-slate-400"
+        class="h-4 w-4 shrink-0 text-asphalt-400"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -36,6 +36,6 @@ withDefaults(
         <path d="M8 11V7a4 4 0 0 1 8 0v4" />
       </svg>
     </div>
-    <p class="mt-0.5 text-xs text-slate-400">{{ message }}</p>
+    <p class="mt-0.5 text-xs text-asphalt-400">{{ message }}</p>
   </div>
 </template>

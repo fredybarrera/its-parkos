@@ -60,9 +60,9 @@ function origenLabel(origen: Sesion['origen']): string {
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+  <div class="overflow-hidden rounded-xl border border-asphalt-200 bg-white">
     <table class="w-full text-left text-sm">
-      <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+      <thead class="bg-asphalt-50 text-xs uppercase tracking-wide text-asphalt-500">
         <tr>
           <th class="px-4 py-3 font-medium">Patente</th>
           <th class="px-4 py-3 font-medium">Hora de entrada</th>
@@ -73,7 +73,7 @@ function origenLabel(origen: Sesion['origen']): string {
       </thead>
       <TransitionGroup
         tag="tbody"
-        class="divide-y divide-slate-100"
+        class="divide-y divide-asphalt-100"
         enter-active-class="transition-all duration-300 ease-out"
         enter-from-class="opacity-0 -translate-y-1"
         leave-active-class="transition-all duration-200 ease-in"
@@ -81,18 +81,18 @@ function origenLabel(origen: Sesion['origen']): string {
         move-class="transition-transform duration-300 ease-out"
       >
         <tr v-if="sesionesActivas.length === 0" key="empty">
-          <td :colspan="mostrarOrigen ? 5 : 4" class="px-4 py-6 text-center text-slate-400">
+          <td :colspan="mostrarOrigen ? 5 : 4" class="px-4 py-6 text-center text-asphalt-400">
             No hay vehículos dentro del estacionamiento.
           </td>
         </tr>
-        <tr v-for="sesion in sesionesActivas" :key="sesion.id" class="hover:bg-slate-50">
-          <td class="px-4 py-3 font-semibold tracking-wide text-slate-800">{{ sesion.patente }}</td>
-          <td class="px-4 py-3 text-slate-600">{{ formatHora(sesion.horaEntrada) }}</td>
-          <td class="px-4 py-3 font-mono text-slate-700">{{ tiempoTranscurrido(sesion.horaEntrada) }}</td>
+        <tr v-for="sesion in sesionesActivas" :key="sesion.id" class="hover:bg-asphalt-50">
+          <td class="px-4 py-3 font-mono font-semibold tracking-wide text-asphalt-800">{{ sesion.patente }}</td>
+          <td class="px-4 py-3 text-asphalt-600">{{ formatHora(sesion.horaEntrada) }}</td>
+          <td class="px-4 py-3 font-mono text-asphalt-700">{{ tiempoTranscurrido(sesion.horaEntrada) }}</td>
           <td v-if="mostrarOrigen" class="px-4 py-3">
             <span
               class="rounded-full px-2 py-0.5 text-xs font-medium"
-              :class="sesion.origen === 'lpr' ? 'bg-emerald-50 text-emerald-700' : 'bg-slate-100 text-slate-600'"
+              :class="sesion.origen === 'lpr' ? 'bg-signal-50 text-signal-700' : 'bg-asphalt-100 text-asphalt-600'"
             >
               {{ origenLabel(sesion.origen) }}
             </span>
@@ -100,7 +100,7 @@ function origenLabel(origen: Sesion['origen']): string {
           <td class="px-4 py-3 text-right">
             <button
               type="button"
-              class="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-100"
+              class="rounded-lg border border-asphalt-300 px-3 py-1.5 text-xs font-medium text-asphalt-700 transition-colors hover:bg-asphalt-100"
               @click="emit('salida', sesion.id)"
             >
               Salida

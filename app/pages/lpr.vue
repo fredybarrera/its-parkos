@@ -1,3 +1,3 @@
 <template>
-  <h1 class="text-2xl font-bold text-slate-800">Lectura de patente</h1>
+  <h1 class="font-display text-2xl font-semibold uppercase tracking-wide text-asphalt-900">Lectura de patente</h1>
 </template>

@@ -50,20 +50,20 @@ watch(tarifaVigente, (actual) => {
 <template>
   <div class="max-w-2xl space-y-6">
     <div>
-      <h1 class="text-2xl font-bold text-slate-800">Tarifas</h1>
-      <p class="mt-1 text-sm text-slate-500">
+      <h1 class="font-display text-2xl font-semibold uppercase tracking-wide text-asphalt-900">Tarifas</h1>
+      <p class="mt-1 text-sm text-asphalt-500">
         Configura el cobro vigente. Se aplica de inmediato a las salidas que se registren en Operación.
       </p>
     </div>
 
-    <div class="rounded-xl border border-slate-200 bg-white p-6">
-      <div role="tablist" aria-label="Tipo de tarifa" class="inline-flex items-center gap-1 rounded-full bg-slate-100 p-1">
+    <div class="rounded-xl border border-asphalt-200 bg-white p-6">
+      <div role="tablist" aria-label="Tipo de tarifa" class="inline-flex items-center gap-1 rounded-full bg-asphalt-100 p-1">
         <button
           type="button"
           role="tab"
           :aria-selected="form.tipo === 'hora_fraccion'"
           class="rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-150"
-          :class="form.tipo === 'hora_fraccion' ? 'bg-white text-emerald-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'"
+          :class="form.tipo === 'hora_fraccion' ? 'bg-white text-signal-700 shadow-sm' : 'text-asphalt-500 hover:text-asphalt-700'"
           @click="elegirTipo('hora_fraccion')"
         >
           Por hora y fracción
@@ -73,7 +73,7 @@ watch(tarifaVigente, (actual) => {
           role="tab"
           :aria-selected="form.tipo === 'plana'"
           class="rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-150"
-          :class="form.tipo === 'plana' ? 'bg-white text-emerald-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'"
+          :class="form.tipo === 'plana' ? 'bg-white text-signal-700 shadow-sm' : 'text-asphalt-500 hover:text-asphalt-700'"
           @click="elegirTipo('plana')"
         >
           Tarifa plana
@@ -82,36 +82,36 @@ watch(tarifaVigente, (actual) => {
 
       <div v-if="form.tipo === 'hora_fraccion'" class="mt-6 grid grid-cols-2 gap-4">
         <label class="block">
-          <span class="text-sm font-medium text-slate-700">Valor por hora (CLP)</span>
+          <span class="text-sm font-medium text-asphalt-700">Valor por hora (CLP)</span>
           <input
             v-model.number="form.valorHora"
             type="number"
             min="0"
             step="50"
-            class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-emerald-500 focus:outline-none"
+            class="mt-1 w-full rounded-md border border-asphalt-300 px-3 py-2 text-sm text-asphalt-800 focus:border-signal-500 focus:outline-none"
           />
         </label>
         <label class="block">
-          <span class="text-sm font-medium text-slate-700">Fracción de cobro (minutos)</span>
+          <span class="text-sm font-medium text-asphalt-700">Fracción de cobro (minutos)</span>
           <input
             v-model.number="form.fraccionMinutos"
             type="number"
             min="1"
             step="1"
-            class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-emerald-500 focus:outline-none"
+            class="mt-1 w-full rounded-md border border-asphalt-300 px-3 py-2 text-sm text-asphalt-800 focus:border-signal-500 focus:outline-none"
           />
         </label>
       </div>
 
       <div v-else class="mt-6 max-w-xs">
         <label class="block">
-          <span class="text-sm font-medium text-slate-700">Monto fijo por estadía (CLP)</span>
+          <span class="text-sm font-medium text-asphalt-700">Monto fijo por estadía (CLP)</span>
           <input
             v-model.number="form.valorPlano"
             type="number"
             min="0"
             step="50"
-            class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-emerald-500 focus:outline-none"
+            class="mt-1 w-full rounded-md border border-asphalt-300 px-3 py-2 text-sm text-asphalt-800 focus:border-signal-500 focus:outline-none"
           />
         </label>
       </div>
@@ -119,7 +119,7 @@ watch(tarifaVigente, (actual) => {
       <div class="mt-6 flex items-center gap-3">
         <button
           type="button"
-          class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-emerald-700"
+          class="rounded-lg bg-signal-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-signal-700"
           @click="guardar"
         >
           Guardar tarifa
@@ -130,13 +130,13 @@ watch(tarifaVigente, (actual) => {
           enter-from-class="opacity-0"
           leave-to-class="opacity-0"
         >
-          <span v-if="guardadoVisible" class="text-sm font-medium text-emerald-600">Tarifa actualizada ✓</span>
+          <span v-if="guardadoVisible" class="text-sm font-medium text-signal-600">Tarifa actualizada ✓</span>
         </Transition>
       </div>
     </div>
 
-    <div class="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
-      Tarifa vigente: <span class="font-semibold text-slate-800">{{ resumenVigente }}</span>
+    <div class="rounded-xl border border-asphalt-200 bg-asphalt-50 p-4 text-sm text-asphalt-600">
+      Tarifa vigente: <span class="font-mono font-semibold text-asphalt-800">{{ resumenVigente }}</span>
     </div>
   </div>
 </template>

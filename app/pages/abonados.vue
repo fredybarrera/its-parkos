@@ -41,19 +41,19 @@ function onAgregar({ nombre, patente }: { nombre: string; patente: string }) {
   <div class="space-y-6">
     <div class="flex flex-wrap items-start justify-between gap-4">
       <div>
-        <h1 class="text-2xl font-bold text-slate-800">Abonados</h1>
-        <p class="mt-1 text-sm text-slate-500">Clientes con convenio mensual.</p>
+        <h1 class="font-display text-2xl font-semibold uppercase tracking-wide text-asphalt-900">Abonados</h1>
+        <p class="mt-1 text-sm text-asphalt-500">Clientes con convenio mensual.</p>
       </div>
 
       <div v-if="!ilimitado" class="text-right">
-        <p class="text-sm font-medium" :class="enElLimite ? 'text-rose-600' : 'text-slate-600'">
-          <span class="text-lg font-bold" :class="enElLimite ? 'text-rose-600' : 'text-slate-800'">{{ total }}</span>
+        <p class="text-sm font-medium" :class="enElLimite ? 'text-brake-600' : 'text-asphalt-600'">
+          <span class="font-mono text-lg font-bold" :class="enElLimite ? 'text-brake-600' : 'text-asphalt-800'">{{ total }}</span>
           / {{ limite }} abonados
         </p>
-        <div class="mt-1 h-1.5 w-36 rounded-full bg-slate-100">
+        <div class="mt-1 h-1.5 w-36 rounded-full bg-asphalt-100">
           <div
             class="h-1.5 rounded-full transition-all duration-300"
-            :class="enElLimite ? 'bg-rose-500' : 'bg-emerald-500'"
+            :class="enElLimite ? 'bg-brake-500' : 'bg-signal-500'"
             :style="{ width: `${porcentajeUso}%` }"
           />
         </div>
@@ -61,7 +61,7 @@ function onAgregar({ nombre, patente }: { nombre: string; patente: string }) {
     </div>
 
     <div class="flex items-center justify-between">
-      <p class="text-sm text-slate-500">
+      <p class="text-sm text-asphalt-500">
         {{ total }} {{ total === 1 ? 'abonado registrado' : 'abonados registrados' }}
       </p>
 
@@ -70,9 +70,9 @@ function onAgregar({ nombre, patente }: { nombre: string; patente: string }) {
       <CommonFeatureLock
         v-else
         :message="mensajeLimite"
-        class="rounded-lg border border-slate-200 bg-white px-4 py-2"
+        class="rounded-lg border border-asphalt-200 bg-white px-4 py-2"
       >
-        <span class="font-medium text-slate-500">Agregar abonado</span>
+        <span class="font-medium text-asphalt-500">Agregar abonado</span>
       </CommonFeatureLock>
     </div>
 

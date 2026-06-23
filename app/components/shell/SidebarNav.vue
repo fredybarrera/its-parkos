@@ -55,17 +55,17 @@ function isActive(item: NavItem): boolean {
       v-for="item in coreItems"
       :key="item.to"
       :to="item.to"
-      class="rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+      class="rounded-lg border-l-2 px-3 py-2 text-sm font-medium transition-colors"
       :class="
         isActive(item)
-          ? 'bg-emerald-50 text-emerald-700'
-          : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+          ? 'border-signal-600 bg-signal-50 text-signal-700'
+          : 'border-transparent text-asphalt-600 hover:bg-asphalt-100 hover:text-asphalt-900'
       "
     >
       {{ item.label }}
     </NuxtLink>
 
-    <hr class="my-2 border-slate-200" />
+    <hr class="my-2 border-asphalt-200" />
 
     <!-- Gated: navegable si está desbloqueado, con candado si no -->
     <template v-for="item in gatedItems" :key="item.to">
@@ -75,8 +75,8 @@ function isActive(item: NavItem): boolean {
         class="rounded-lg px-3 py-2 text-sm font-medium transition-colors"
         :class="
           isActive(item)
-            ? 'bg-emerald-50 text-emerald-700'
-            : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+            ? 'bg-signal-50 text-signal-700'
+            : 'text-asphalt-600 hover:bg-asphalt-100 hover:text-asphalt-900'
         "
       >
         {{ item.label }}
@@ -85,7 +85,7 @@ function isActive(item: NavItem): boolean {
       <CommonFeatureLock
         v-else
         class="rounded-lg px-3 py-2 transition-shadow duration-500"
-        :class="candadosResaltados ? 'ring-2 ring-amber-400 ring-offset-2 ring-offset-white' : ''"
+        :class="candadosResaltados ? 'ring-2 ring-hazard-400 ring-offset-2 ring-offset-white' : ''"
       >
         {{ item.label }}
       </CommonFeatureLock>

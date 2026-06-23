@@ -17,16 +17,16 @@ function formatHora(hora: number): string {
 
 <template>
   <div class="space-y-3">
-    <p v-if="horasPico.length === 0" class="text-sm text-slate-400">Sin datos suficientes todavía.</p>
+    <p v-if="horasPico.length === 0" class="text-sm text-asphalt-400">Sin datos suficientes todavía.</p>
     <div v-for="h in horasPico" :key="h.hora" class="flex items-center gap-3">
-      <span class="w-12 shrink-0 text-xs font-medium text-slate-500">{{ formatHora(h.hora) }}</span>
-      <div class="h-2.5 flex-1 rounded-full bg-slate-100">
+      <span class="w-12 shrink-0 text-xs font-medium text-asphalt-500">{{ formatHora(h.hora) }}</span>
+      <div class="h-2.5 flex-1 rounded-full bg-asphalt-100">
         <div
-          class="h-2.5 rounded-full bg-emerald-500 transition-all duration-300"
+          class="h-2.5 rounded-full bg-signal-500 transition-all duration-300"
           :style="{ width: `${(h.vehiculos / maxVehiculos) * 100}%` }"
         />
       </div>
-      <span class="w-16 shrink-0 text-right text-xs font-medium text-slate-700">{{ h.vehiculos }} veh.</span>
+      <span class="w-16 shrink-0 text-right text-xs font-medium text-asphalt-700">{{ h.vehiculos }} veh.</span>
     </div>
   </div>
 </template>

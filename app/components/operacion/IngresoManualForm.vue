@@ -43,34 +43,34 @@ function confirmar() {
       class="rounded-lg text-sm font-medium transition-colors"
       :class="
         primary
-          ? 'bg-emerald-600 px-4 py-2 text-white hover:bg-emerald-700'
-          : 'border border-slate-300 px-3 py-1.5 text-slate-600 hover:bg-slate-100'
+          ? 'bg-signal-600 px-4 py-2 text-white hover:bg-signal-700'
+          : 'border border-asphalt-300 px-3 py-1.5 text-asphalt-600 hover:bg-asphalt-100'
       "
       @click="abrir"
     >
       Registrar ingreso
     </button>
 
-    <div v-else class="flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-sm">
+    <div v-else class="flex items-center gap-2 rounded-lg border border-asphalt-200 bg-white p-2 shadow-sm">
       <input
         v-model="patente"
         type="text"
         placeholder="Patente"
         autofocus
-        class="w-32 rounded-md border border-slate-300 px-2 py-1.5 text-sm uppercase tracking-wide text-slate-700 focus:border-emerald-500 focus:outline-none"
+        class="w-32 rounded-md border border-asphalt-300 px-2 py-1.5 text-sm uppercase tracking-wide text-asphalt-700 focus:border-signal-500 focus:outline-none"
         @keyup.enter="confirmar"
         @keyup.esc="cancelar"
       />
       <button
         type="button"
-        class="rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-700"
+        class="rounded-md bg-signal-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-signal-700"
         @click="confirmar"
       >
         Confirmar
       </button>
       <button
         type="button"
-        class="rounded-md px-2 py-1.5 text-sm text-slate-500 hover:text-slate-700"
+        class="rounded-md px-2 py-1.5 text-sm text-asphalt-500 hover:text-asphalt-700"
         @click="cancelar"
       >
         Cancelar

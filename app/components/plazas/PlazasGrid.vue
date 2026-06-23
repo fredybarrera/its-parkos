@@ -56,25 +56,25 @@ onUnmounted(() => {
       <div
         v-for="plaza in plazas"
         :key="plaza.id"
-        class="flex aspect-square flex-col items-center justify-center rounded-lg border text-sm font-semibold transition-all duration-300"
+        class="flex aspect-square flex-col items-center justify-center rounded-lg border font-mono text-sm font-semibold transition-all duration-300"
         :class="[
           plaza.estado === 'libre'
-            ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
-            : 'border-rose-200 bg-rose-50 text-rose-700',
-          resaltadas.has(plaza.id) ? 'scale-110 ring-2 ring-amber-400' : 'scale-100',
+            ? 'border-signal-200 bg-signal-50 text-signal-700'
+            : 'border-brake-200 bg-brake-50 text-brake-700',
+          resaltadas.has(plaza.id) ? 'scale-110 ring-2 ring-hazard-400' : 'scale-100',
         ]"
       >
         {{ plaza.codigo }}
       </div>
     </div>
 
-    <div class="flex items-center gap-4 text-xs text-slate-500">
+    <div class="flex items-center gap-4 text-xs text-asphalt-500">
       <span class="flex items-center gap-1.5">
-        <span class="h-3 w-3 rounded-sm border border-emerald-200 bg-emerald-50" />
+        <span class="h-3 w-3 rounded-sm border border-signal-200 bg-signal-50" />
         Libre
       </span>
       <span class="flex items-center gap-1.5">
-        <span class="h-3 w-3 rounded-sm border border-rose-200 bg-rose-50" />
+        <span class="h-3 w-3 rounded-sm border border-brake-200 bg-brake-50" />
         Ocupada
       </span>
     </div>

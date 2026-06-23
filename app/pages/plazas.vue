@@ -72,19 +72,26 @@ onUnmounted(() => {
 <template>
   <div class="space-y-6">
     <div class="flex items-center justify-between">
-      <h1 class="text-2xl font-bold text-slate-800">Mapa de estacionamientos</h1>
-      <p class="text-sm font-medium text-slate-600">
-        <span class="text-slate-800">{{ ocupadas }}</span> / {{ totalPlazas }} ocupadas
+      <h1 class="font-display text-2xl font-semibold uppercase tracking-wide text-asphalt-900">Mapa de estacionamientos</h1>
+      <p class="font-mono text-sm font-medium text-asphalt-600">
+        <span class="text-asphalt-800">{{ ocupadas }}</span> / {{ totalPlazas }} ocupadas
       </p>
     </div>
 
-    <section v-if="has('signage.dynamic')" class="rounded-xl bg-slate-900 p-6 text-center">
-      <p class="text-xs uppercase tracking-widest text-slate-400">Espacios libres</p>
-      <p class="mt-1 text-6xl font-bold tabular-nums text-emerald-400">{{ libres }}</p>
+    <section
+      v-if="has('signage.dynamic')"
+      class="rounded-xl border border-asphalt-700 bg-asphalt-900 p-6 text-center"
+    >
+      <p class="text-xs uppercase tracking-[0.2em] text-asphalt-400">Espacios libres</p>
+      <p
+        class="mt-1 font-mono text-6xl font-semibold tabular-nums text-signal-400 [text-shadow:0_0_18px_rgb(79_190_124_/_55%)]"
+      >
+        {{ libres }}
+      </p>
     </section>
 
-    <p v-if="has('occupancy.sensors')" class="flex items-center gap-1.5 text-xs text-slate-500">
-      <span class="h-2 w-2 rounded-full bg-emerald-500" />
+    <p v-if="has('occupancy.sensors')" class="flex items-center gap-1.5 text-xs text-asphalt-500">
+      <span class="h-2 w-2 rounded-full bg-signal-500" />
       Sensores en vivo · última lectura hace {{ ultimaLecturaHaceSegundos }}s
     </p>
 

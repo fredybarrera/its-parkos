@@ -1,5 +1,6 @@
 <!--
-  DemoControls — control discreto del modo demo (recorrido guiado).
+  DemoControls — control discreto del modo demo (recorrido guiado), montado
+  en la barra de consola oscura del TopBar.
 
   Usa useDemoTour, que reproduce el guion de venta llamando a las mismas
   acciones reales que un presentador dispararía a mano (useParkingData,
@@ -24,7 +25,7 @@ function reiniciarDatos() {
     <button
       v-if="estado === 'idle'"
       type="button"
-      class="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 transition-colors hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700"
+      class="flex items-center gap-1.5 rounded-full border border-asphalt-700 px-3 py-1.5 text-xs font-medium text-asphalt-200 transition-colors hover:border-hazard-400 hover:text-hazard-300"
       title="Iniciar recorrido guiado"
       @click="iniciar"
     >
@@ -38,7 +39,7 @@ function reiniciarDatos() {
       <button
         v-if="estado === 'running'"
         type="button"
-        class="rounded-full border border-slate-200 p-1.5 text-slate-500 transition-colors hover:bg-slate-100"
+        class="rounded-full border border-asphalt-700 p-1.5 text-asphalt-300 transition-colors hover:border-asphalt-500 hover:text-white"
         title="Pausar recorrido"
         @click="pausar"
       >
@@ -50,7 +51,7 @@ function reiniciarDatos() {
       <button
         v-else
         type="button"
-        class="rounded-full border border-slate-200 p-1.5 text-slate-500 transition-colors hover:bg-slate-100"
+        class="rounded-full border border-asphalt-700 p-1.5 text-asphalt-300 transition-colors hover:border-asphalt-500 hover:text-white"
         title="Reanudar recorrido"
         @click="reanudar"
       >
@@ -60,7 +61,7 @@ function reiniciarDatos() {
       </button>
       <button
         type="button"
-        class="rounded-full border border-slate-200 p-1.5 text-slate-500 transition-colors hover:bg-rose-50 hover:text-rose-600"
+        class="rounded-full border border-asphalt-700 p-1.5 text-asphalt-300 transition-colors hover:border-brake-500 hover:text-brake-400"
         title="Detener recorrido"
         @click="detener"
       >
@@ -72,7 +73,7 @@ function reiniciarDatos() {
 
     <button
       type="button"
-      class="rounded-full border border-slate-200 p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
+      class="rounded-full border border-asphalt-700 p-1.5 text-asphalt-500 transition-colors hover:border-asphalt-500 hover:text-asphalt-200"
       title="Reiniciar datos del demo"
       @click="reiniciarDatos"
     >

@@ -19,40 +19,40 @@ function ingresar() {
 <template>
   <div class="w-full max-w-sm rounded-2xl bg-white p-8 shadow-2xl">
     <div class="mb-6 flex flex-col items-center gap-2 text-center">
-      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-600 text-xl font-bold text-white">
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-signal-600 font-display text-xl font-bold text-white">
         P
       </div>
-      <h1 class="text-xl font-bold text-slate-800">ParkOS</h1>
-      <p class="text-sm text-slate-500">Gestión y control de estacionamientos</p>
+      <h1 class="font-display text-xl font-semibold uppercase tracking-wide text-asphalt-900">ParkOS</h1>
+      <p class="text-sm text-asphalt-500">Control de acceso, plazas y cobro en un mismo lugar</p>
     </div>
 
     <form class="space-y-4" @submit.prevent="ingresar">
       <label class="block">
-        <span class="text-sm font-medium text-slate-700">Correo</span>
+        <span class="text-sm font-medium text-asphalt-700">Correo</span>
         <input
           v-model="email"
           type="email"
-          class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-emerald-500 focus:outline-none"
+          class="mt-1 w-full rounded-md border border-asphalt-300 px-3 py-2 text-sm text-asphalt-800 focus:border-signal-500 focus:outline-none"
         />
       </label>
       <label class="block">
-        <span class="text-sm font-medium text-slate-700">Contraseña</span>
+        <span class="text-sm font-medium text-asphalt-700">Contraseña</span>
         <input
           v-model="password"
           type="password"
           placeholder="••••••••"
-          class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-emerald-500 focus:outline-none"
+          class="mt-1 w-full rounded-md border border-asphalt-300 px-3 py-2 text-sm text-asphalt-800 focus:border-signal-500 focus:outline-none"
         />
       </label>
 
       <button
         type="submit"
-        class="w-full rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
+        class="w-full rounded-lg bg-signal-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-signal-700"
       >
         Ingresar
       </button>
     </form>
 
-    <p class="mt-6 text-center text-xs text-slate-400">Demo comercial · ParkOS</p>
+    <p class="mt-6 text-center text-xs text-asphalt-400">Demo comercial · ParkOS</p>
   </div>
 </template>

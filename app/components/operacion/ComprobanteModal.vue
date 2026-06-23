@@ -31,56 +31,67 @@ function formatTiempo(minutos: number): string {
 </script>
 
 <template>
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 px-4">
-    <div class="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl">
-      <div class="mb-4 flex items-center gap-2">
-        <div class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
-          <svg
-            class="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-asphalt-900/40 px-4">
+    <div class="w-full max-w-xs rounded-lg bg-white shadow-xl">
+      <div class="px-6 pt-6">
+        <div class="flex items-center gap-2">
+          <div class="flex h-9 w-9 items-center justify-center rounded-full bg-signal-50 text-signal-600">
+            <svg
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-lg font-semibold text-asphalt-800">Salida registrada</h2>
+            <p class="font-mono text-[11px] uppercase tracking-wide text-asphalt-400">
+              Boleta · {{ comprobante.id.slice(-6) }}
+            </p>
+          </div>
         </div>
-        <h2 class="text-lg font-semibold text-slate-800">Salida registrada</h2>
       </div>
 
-      <dl class="space-y-2 text-sm">
+      <div class="my-4 border-t border-dashed border-asphalt-200" />
+
+      <dl class="space-y-2 px-6 font-mono text-sm">
         <div class="flex justify-between">
-          <dt class="text-slate-500">Patente</dt>
-          <dd class="font-semibold tracking-wide text-slate-800">{{ comprobante.patente }}</dd>
+          <dt class="text-asphalt-500">Patente</dt>
+          <dd class="font-semibold tracking-wide text-asphalt-800">{{ comprobante.patente }}</dd>
         </div>
         <div class="flex justify-between">
-          <dt class="text-slate-500">Entrada</dt>
-          <dd class="text-slate-700">{{ formatHora(horaEntrada) }}</dd>
+          <dt class="text-asphalt-500">Entrada</dt>
+          <dd class="text-asphalt-700">{{ formatHora(horaEntrada) }}</dd>
         </div>
         <div class="flex justify-between">
-          <dt class="text-slate-500">Salida</dt>
-          <dd class="text-slate-700">{{ formatHora(comprobante.fecha) }}</dd>
+          <dt class="text-asphalt-500">Salida</dt>
+          <dd class="text-asphalt-700">{{ formatHora(comprobante.fecha) }}</dd>
         </div>
         <div class="flex justify-between">
-          <dt class="text-slate-500">Tiempo total</dt>
-          <dd class="text-slate-700">{{ formatTiempo(comprobante.tiempoTotalMinutos) }}</dd>
+          <dt class="text-asphalt-500">Tiempo total</dt>
+          <dd class="text-asphalt-700">{{ formatTiempo(comprobante.tiempoTotalMinutos) }}</dd>
         </div>
-        <div class="flex justify-between border-t border-slate-100 pt-2 text-base">
-          <dt class="font-medium text-slate-600">Monto a pagar</dt>
-          <dd class="font-bold text-emerald-700">{{ formatMonto(comprobante.monto) }}</dd>
+        <div class="flex justify-between border-t border-asphalt-100 pt-2 text-base">
+          <dt class="font-sans font-medium text-asphalt-600">Monto a pagar</dt>
+          <dd class="font-bold text-signal-700">{{ formatMonto(comprobante.monto) }}</dd>
         </div>
       </dl>
 
-      <button
-        type="button"
-        class="mt-6 w-full rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
-        @click="$emit('cerrar')"
-      >
-        Cerrar
-      </button>
+      <div class="px-6 pb-6 pt-5">
+        <button
+          type="button"
+          class="w-full rounded-lg bg-signal-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-signal-700"
+          @click="$emit('cerrar')"
+        >
+          Cerrar
+        </button>
+      </div>
     </div>
   </div>
 </template>

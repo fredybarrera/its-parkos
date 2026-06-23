@@ -44,8 +44,8 @@ const comparativaOrigen = computed(() => {
 <template>
   <div class="space-y-8">
     <div>
-      <h1 class="text-2xl font-bold text-slate-800">Reportes</h1>
-      <p class="mt-1 text-sm text-slate-500">Resumen de la operación del día.</p>
+      <h1 class="font-display text-2xl font-semibold uppercase tracking-wide text-asphalt-900">Reportes</h1>
+      <p class="mt-1 text-sm text-asphalt-500">Resumen de la operación del día.</p>
     </div>
 
     <section v-if="has('reports.basic')" class="space-y-4">
@@ -56,8 +56,8 @@ const comparativaOrigen = computed(() => {
         <ReportesMetricCard label="Ocupación promedio" :value="`${reporte.ocupacionPromedio}%`" />
       </div>
 
-      <div class="rounded-xl border border-slate-200 bg-white p-6">
-        <h2 class="text-sm font-semibold text-slate-700">Horas punta</h2>
+      <div class="rounded-xl border border-asphalt-200 bg-white p-6">
+        <h2 class="text-sm font-semibold text-asphalt-700">Horas punta</h2>
         <div class="mt-4">
           <ReportesHorasPicoChart :horas-pico="reporte.horasPico" />
         </div>
@@ -66,42 +66,42 @@ const comparativaOrigen = computed(() => {
 
     <section class="space-y-4">
       <div>
-        <h2 class="text-lg font-bold text-slate-800">Reportes avanzados</h2>
-        <p class="mt-1 text-sm text-slate-500">Métricas adicionales para una visión completa de la operación.</p>
+        <h2 class="text-lg font-bold text-asphalt-800">Reportes avanzados</h2>
+        <p class="mt-1 text-sm text-asphalt-500">Métricas adicionales para una visión completa de la operación.</p>
       </div>
 
       <div v-if="has('reports.advanced')" class="grid gap-4 lg:grid-cols-2">
-        <div class="rounded-xl border border-slate-200 bg-white p-6">
-          <h3 class="text-sm font-semibold text-slate-700">Ocupación por sector</h3>
+        <div class="rounded-xl border border-asphalt-200 bg-white p-6">
+          <h3 class="text-sm font-semibold text-asphalt-700">Ocupación por sector</h3>
           <div class="mt-4 space-y-3">
             <div v-for="s in ocupacionPorSector" :key="s.sector" class="flex items-center gap-3">
-              <span class="w-16 shrink-0 text-xs font-medium text-slate-500">Sector {{ s.sector }}</span>
-              <div class="h-2.5 flex-1 rounded-full bg-slate-100">
-                <div class="h-2.5 rounded-full bg-emerald-500" :style="{ width: `${s.porcentaje}%` }" />
+              <span class="w-16 shrink-0 text-xs font-medium text-asphalt-500">Sector {{ s.sector }}</span>
+              <div class="h-2.5 flex-1 rounded-full bg-asphalt-100">
+                <div class="h-2.5 rounded-full bg-signal-500" :style="{ width: `${s.porcentaje}%` }" />
               </div>
-              <span class="w-16 shrink-0 text-right text-xs font-medium text-slate-700">{{ s.ocupadas }}/{{ s.total }}</span>
+              <span class="w-16 shrink-0 text-right text-xs font-medium text-asphalt-700">{{ s.ocupadas }}/{{ s.total }}</span>
             </div>
           </div>
         </div>
 
-        <div class="rounded-xl border border-slate-200 bg-white p-6">
-          <h3 class="text-sm font-semibold text-slate-700">Ingresos por origen</h3>
+        <div class="rounded-xl border border-asphalt-200 bg-white p-6">
+          <h3 class="text-sm font-semibold text-asphalt-700">Ingresos por origen</h3>
           <div class="mt-4 grid grid-cols-2 gap-4">
             <div>
-              <p class="text-xs font-medium uppercase tracking-wide text-slate-500">Manual</p>
-              <p class="mt-1 text-lg font-bold text-slate-800">{{ formatCLP(comparativaOrigen.manual.ingresos) }}</p>
-              <p class="text-xs text-slate-400">{{ comparativaOrigen.manual.cantidad }} sesiones cerradas</p>
+              <p class="text-xs font-medium uppercase tracking-wide text-asphalt-500">Manual</p>
+              <p class="mt-1 font-mono text-lg font-bold text-asphalt-800">{{ formatCLP(comparativaOrigen.manual.ingresos) }}</p>
+              <p class="text-xs text-asphalt-400">{{ comparativaOrigen.manual.cantidad }} sesiones cerradas</p>
             </div>
             <div>
-              <p class="text-xs font-medium uppercase tracking-wide text-slate-500">LPR</p>
-              <p class="mt-1 text-lg font-bold text-slate-800">{{ formatCLP(comparativaOrigen.lpr.ingresos) }}</p>
-              <p class="text-xs text-slate-400">{{ comparativaOrigen.lpr.cantidad }} sesiones cerradas</p>
+              <p class="text-xs font-medium uppercase tracking-wide text-asphalt-500">LPR</p>
+              <p class="mt-1 font-mono text-lg font-bold text-asphalt-800">{{ formatCLP(comparativaOrigen.lpr.ingresos) }}</p>
+              <p class="text-xs text-asphalt-400">{{ comparativaOrigen.lpr.cantidad }} sesiones cerradas</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div v-else class="space-y-2 rounded-xl border border-slate-200 bg-white p-6">
+      <div v-else class="space-y-2 rounded-xl border border-asphalt-200 bg-white p-6">
         <CommonFeatureLock class="rounded-lg px-3 py-2">Ocupación por sector en tiempo real</CommonFeatureLock>
         <CommonFeatureLock class="rounded-lg px-3 py-2">Comparativa de ingresos por origen de ingreso</CommonFeatureLock>
         <CommonFeatureLock class="rounded-lg px-3 py-2">Tendencias de ocupación y rotación</CommonFeatureLock>
