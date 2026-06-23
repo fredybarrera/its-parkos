@@ -1,0 +1,14 @@
+# Normaliza finales de línea: todo texto se guarda en el repo con LF,
+# y Git lo adapta al checkout de cada quien. Evita diffs ruidosos por CRLF
+# entre colaboradores en Windows/Mac/Linux.
+* text=auto eol=lf
+
+# Binarios: nunca tocar finales de línea.
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.woff binary
+*.woff2 binary
