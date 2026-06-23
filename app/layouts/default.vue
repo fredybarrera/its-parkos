@@ -5,6 +5,7 @@
 <template>
   <div class="flex h-screen flex-col bg-asphalt-50 text-asphalt-900">
     <ShellTopBar />
+    <ShellDemoBanner />
     <div class="flex flex-1 overflow-hidden">
       <aside class="w-64 shrink-0 overflow-y-auto border-r border-asphalt-200 bg-white">
         <ShellSidebarNav />
@@ -13,7 +14,5 @@
         <slot />
       </main>
     </div>
-
-    <ShellDemoBanner />
   </div>
 </template>

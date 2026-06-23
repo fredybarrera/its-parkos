@@ -1,45 +1,61 @@
 <!--
-  DemoBanner — feedback de "el recorrido guiado está corriendo", visible en
-  cualquier pantalla, con un control siempre a mano para devolver el manejo
-  al presentador. Solo lee useDemoTour; no dispara ninguna acción por sí
-  mismo.
+  DemoBanner — feedback de "el recorrido guiado está corriendo".
+
+  Vive pegado al TopBar (no flotando sobre el contenido) para que sea
+  imposible no verlo: misma franja de consola oscura, con una barra de
+  progreso real debajo que se llena escena a escena. Solo lee useDemoTour;
+  no dispara ninguna acción por sí mismo.
 -->
 <script setup lang="ts">
+import { computed } from 'vue'
+
 const { estado, pasoActual, totalPasos, labelActual, pausar, reanudar, detener } = useDemoTour()
+
+const porcentaje = computed(() => Math.round(((pasoActual.value + 1) / totalPasos) * 100))
 </script>
 
 <template>
   <Transition
     enter-active-class="transition-all duration-300 ease-out"
     leave-active-class="transition-all duration-200 ease-in"
-    enter-from-class="translate-y-4 opacity-0"
-    leave-to-class="translate-y-4 opacity-0"
+    enter-from-class="-translate-y-full opacity-0"
+    leave-to-class="-translate-y-full opacity-0"
   >
-    <div
-      v-if="estado !== 'idle'"
-      class="fixed bottom-4 left-1/2 z-40 flex w-fit max-w-[calc(100vw-2rem)] -translate-x-1/2 items-center gap-3 rounded-full border border-asphalt-200 bg-white/95 px-4 py-2 shadow-lg backdrop-blur"
-    >
-      <span
-        class="h-2 w-2 shrink-0 rounded-full animate-pulse"
-        :class="estado === 'running' ? 'bg-signal-500' : 'bg-hazard-500'"
-      />
-      <span class="truncate text-xs font-medium text-asphalt-600">
-        Recorrido {{ pasoActual + 1 }}/{{ totalPasos }} · {{ labelActual }}
-      </span>
-      <button
-        type="button"
-        class="shrink-0 rounded-full bg-asphalt-100 px-2.5 py-1 text-xs font-medium text-asphalt-600 transition-colors hover:bg-asphalt-200"
-        @click="estado === 'running' ? pausar() : reanudar()"
-      >
-        {{ estado === 'running' ? 'Pausar' : 'Reanudar' }}
-      </button>
-      <button
-        type="button"
-        class="shrink-0 rounded-full bg-brake-50 px-2.5 py-1 text-xs font-medium text-brake-600 transition-colors hover:bg-brake-100"
-        @click="detener"
-      >
-        Detener
-      </button>
+    <div v-if="estado !== 'idle'" class="bg-asphalt-800 text-white shadow-md">
+      <div class="flex items-center gap-3 px-6 py-2.5">
+        <span
+          class="h-2.5 w-2.5 shrink-0 rounded-full animate-pulse"
+          :class="estado === 'running' ? 'bg-signal-400' : 'bg-hazard-400'"
+        />
+        <span class="shrink-0 font-mono text-xs font-semibold uppercase tracking-wide text-hazard-300">
+          Recorrido {{ pasoActual + 1 }}/{{ totalPasos }}
+        </span>
+        <span class="truncate text-sm text-asphalt-100">{{ labelActual }}</span>
+
+        <div class="ml-auto flex shrink-0 items-center gap-2">
+          <button
+            type="button"
+            class="rounded-full bg-asphalt-700 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-asphalt-600"
+            @click="estado === 'running' ? pausar() : reanudar()"
+          >
+            {{ estado === 'running' ? 'Pausar' : 'Reanudar' }}
+          </button>
+          <button
+            type="button"
+            class="rounded-full bg-brake-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-brake-700"
+            @click="detener"
+          >
+            Detener
+          </button>
+        </div>
+      </div>
+
+      <div class="h-1.5 bg-asphalt-900">
+        <div
+          class="h-1.5 bg-hazard-400 transition-all duration-500 ease-out"
+          :style="{ width: `${porcentaje}%` }"
+        />
+      </div>
     </div>
   </Transition>
 </template>
