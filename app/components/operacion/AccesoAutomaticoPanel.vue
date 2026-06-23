@@ -76,7 +76,7 @@ async function simularIngreso() {
 
 <template>
   <section class="rounded-xl border border-asphalt-200 bg-white p-5">
-    <div class="flex items-center justify-between gap-4">
+    <div class="flex flex-wrap items-center justify-between gap-4">
       <div>
         <h2 class="text-sm font-semibold text-asphalt-800">Acceso automático</h2>
         <p class="text-xs text-asphalt-500">Cámara LPR + barrera. Simula la llegada de un vehículo.</p>
@@ -91,7 +91,7 @@ async function simularIngreso() {
       </button>
     </div>
 
-    <div class="mt-5 flex items-center gap-6">
+    <div class="mt-5 flex flex-wrap items-center gap-4 sm:gap-6">
       <!-- Cámara -->
       <div class="flex flex-col items-center gap-1.5">
         <div

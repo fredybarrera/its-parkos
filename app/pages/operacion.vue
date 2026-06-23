@@ -15,7 +15,7 @@ const { comprobanteActivo, registrarSalida, cerrarComprobante } = useOperacionFl
 
 <template>
   <div class="space-y-6">
-    <div class="flex items-center justify-between">
+    <div class="flex flex-wrap items-center justify-between gap-3">
       <h1 class="font-display text-2xl font-semibold uppercase tracking-wide text-asphalt-900">Operación en vivo</h1>
       <OperacionIngresoManualForm :primary="!has('access.barrier')" />
     </div>

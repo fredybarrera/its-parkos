@@ -22,7 +22,7 @@ const porcentaje = computed(() => Math.round(((pasoActual.value + 1) / totalPaso
     leave-to-class="-translate-y-full opacity-0"
   >
     <div v-if="estado !== 'idle'" class="bg-asphalt-800 text-white shadow-md">
-      <div class="flex items-center gap-3 px-6 py-2.5">
+      <div class="flex flex-wrap items-center gap-2 px-3 py-2 sm:gap-3 sm:px-6 sm:py-2.5">
         <span
           class="h-2.5 w-2.5 shrink-0 rounded-full animate-pulse"
           :class="estado === 'running' ? 'bg-signal-400' : 'bg-hazard-400'"
@@ -30,9 +30,9 @@ const porcentaje = computed(() => Math.round(((pasoActual.value + 1) / totalPaso
         <span class="shrink-0 font-mono text-xs font-semibold uppercase tracking-wide text-hazard-300">
           Recorrido {{ pasoActual + 1 }}/{{ totalPasos }}
         </span>
-        <span class="truncate text-sm text-asphalt-100">{{ labelActual }}</span>
+        <span class="min-w-0 flex-1 truncate text-sm text-asphalt-100">{{ labelActual }}</span>
 
-        <div class="ml-auto flex shrink-0 items-center gap-2">
+        <div class="flex shrink-0 items-center gap-2">
           <button
             type="button"
             class="rounded-full bg-asphalt-700 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-asphalt-600"

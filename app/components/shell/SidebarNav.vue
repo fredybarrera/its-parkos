@@ -34,6 +34,8 @@ const gatedItems: NavItem[] = [
   { label: 'Barreras', to: '/barreras', requires: 'access.barrier' },
 ]
 
+const emit = defineEmits<{ navigate: [] }>()
+
 const { has } = useEntitlements()
 const route = useRoute()
 const { candadosResaltados } = useDemoSpotlight()
@@ -61,6 +63,7 @@ function isActive(item: NavItem): boolean {
           ? 'border-signal-600 bg-signal-50 text-signal-700'
           : 'border-transparent text-asphalt-600 hover:bg-asphalt-100 hover:text-asphalt-900'
       "
+      @click="emit('navigate')"
     >
       {{ item.label }}
     </NuxtLink>
@@ -78,6 +81,7 @@ function isActive(item: NavItem): boolean {
             ? 'bg-signal-50 text-signal-700'
             : 'text-asphalt-600 hover:bg-asphalt-100 hover:text-asphalt-900'
         "
+        @click="emit('navigate')"
       >
         {{ item.label }}
       </NuxtLink>

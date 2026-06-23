@@ -71,7 +71,7 @@ onUnmounted(() => {
 
 <template>
   <div class="space-y-6">
-    <div class="flex items-center justify-between">
+    <div class="flex flex-wrap items-center justify-between gap-3">
       <h1 class="font-display text-2xl font-semibold uppercase tracking-wide text-asphalt-900">Mapa de estacionamientos</h1>
       <p class="font-mono text-sm font-medium text-asphalt-600">
         <span class="text-asphalt-800">{{ ocupadas }}</span> / {{ totalPlazas }} ocupadas

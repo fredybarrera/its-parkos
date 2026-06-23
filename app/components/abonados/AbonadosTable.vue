@@ -10,7 +10,7 @@ defineProps<{ abonados: Abonado[] }>()
 
 <template>
   <div class="overflow-hidden rounded-xl border border-asphalt-200 bg-white">
-    <div class="max-h-[32rem] overflow-y-auto">
+    <div class="max-h-[32rem] overflow-auto">
       <table class="w-full text-left text-sm">
         <thead class="sticky top-0 bg-asphalt-50 text-xs uppercase tracking-wide text-asphalt-500">
           <tr>

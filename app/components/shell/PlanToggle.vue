@@ -71,7 +71,7 @@ const franjaStyle = {
   >
     <!-- Riel deslizante: blanco en Gestión, franja de barrera en Control -->
     <span
-      class="absolute inset-y-1 w-24 rounded-full transition-all duration-300 ease-[cubic-bezier(.34,1.56,.64,1)]"
+      class="absolute inset-y-1 w-14 rounded-full transition-all duration-300 ease-[cubic-bezier(.34,1.56,.64,1)] sm:w-24"
       :class="esControl ? 'left-1/2 shadow-[0_0_14px_rgb(214_154_0_/_55%)]' : 'left-1 bg-white'"
       :style="esControl ? franjaStyle : undefined"
     />
@@ -82,7 +82,7 @@ const franjaStyle = {
       type="button"
       role="tab"
       :aria-selected="plan.id === opt.id"
-      class="relative z-10 w-24 rounded-full py-1.5 font-display text-sm font-medium uppercase tracking-wide transition-colors duration-150"
+      class="relative z-10 w-14 rounded-full py-1 font-display text-xs font-medium uppercase tracking-wide transition-colors duration-150 sm:w-24 sm:py-1.5 sm:text-sm"
       :class="claseEtiqueta(opt.id)"
       @click="store.setPlan(opt.id)"
     >

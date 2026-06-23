@@ -80,7 +80,7 @@ watch(tarifaVigente, (actual) => {
         </button>
       </div>
 
-      <div v-if="form.tipo === 'hora_fraccion'" class="mt-6 grid grid-cols-2 gap-4">
+      <div v-if="form.tipo === 'hora_fraccion'" class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <label class="block">
           <span class="text-sm font-medium text-asphalt-700">Valor por hora (CLP)</span>
           <input
