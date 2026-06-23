@@ -60,7 +60,7 @@ function onAgregar({ nombre, patente }: { nombre: string; patente: string }) {
       </div>
     </div>
 
-    <div class="flex items-center justify-between">
+    <div class="flex flex-wrap items-center justify-between gap-3">
       <p class="text-sm text-asphalt-500">
         {{ total }} {{ total === 1 ? 'abonado registrado' : 'abonados registrados' }}
       </p>

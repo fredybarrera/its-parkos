@@ -51,7 +51,7 @@ function confirmar() {
       Registrar ingreso
     </button>
 
-    <div v-else class="flex items-center gap-2 rounded-lg border border-asphalt-200 bg-white p-2 shadow-sm">
+    <div v-else class="flex flex-wrap items-center gap-2 rounded-lg border border-asphalt-200 bg-white p-2 shadow-sm">
       <input
         v-model="patente"
         type="text"

@@ -25,14 +25,14 @@ function reiniciarDatos() {
     <button
       v-if="estado === 'idle'"
       type="button"
-      class="flex items-center gap-1.5 rounded-full bg-hazard-400 px-4 py-2 text-sm font-bold text-asphalt-900 shadow-sm transition-colors hover:bg-hazard-300"
+      class="flex items-center gap-1.5 rounded-full bg-hazard-400 px-3 py-2 text-sm font-bold text-asphalt-900 shadow-sm transition-colors hover:bg-hazard-300 sm:px-4"
       title="Iniciar recorrido guiado"
       @click="iniciar"
     >
       <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <polygon points="5 3 19 12 5 21 5 3" />
       </svg>
-      Iniciar recorrido
+      <span class="hidden sm:inline">Iniciar recorrido</span>
     </button>
 
     <template v-else>
