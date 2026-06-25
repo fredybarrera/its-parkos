@@ -4,6 +4,7 @@
 
 import { defineStore } from 'pinia'
 import { calcularMinutosTranscurridos, calcularMonto } from '~/domain/billing'
+import { generarTicketCode } from '~/domain/ticket'
 import { SEED_ABONADOS, SEED_PLAZAS, SEED_SESIONES, SEED_TARIFA } from '~/mocks/seed'
 import type {
   Abonado,
@@ -39,17 +40,25 @@ export const useParkingStore = defineStore('parking', {
 
   actions: {
     registrarIngreso(patente: string, origen: SesionOrigen): Sesion {
+      const id = `ses-${crypto.randomUUID()}`
       const sesion: Sesion = {
-        id: `ses-${crypto.randomUUID()}`,
+        id,
         patente,
         horaEntrada: new Date().toISOString(),
         horaSalida: null,
         estado: 'activa',
         origen,
         monto: null,
+        ...(origen === 'ticket' && { ticketCode: generarTicketCode(id) }),
       }
       this.sesiones.push(sesion)
       return sesion
+    },
+
+    buscarSesionPorTicket(code: string): Sesion | null {
+      return this.sesiones.find(
+        (s) => s.estado === 'activa' && s.ticketCode === code,
+      ) ?? null
     },
 
     registrarSalida(sesionId: string): Comprobante {

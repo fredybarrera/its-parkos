@@ -16,6 +16,7 @@ export const PLANS = {
       'payment.register': true,
       'occupancy.view': true,
       'reports.basic': true,
+      'ticket.barcode': true,
       // Control: apagado
       'access.barrier': false,
       'lpr.camera': false,
@@ -41,6 +42,7 @@ export const PLANS = {
       'payment.register': true,
       'occupancy.view': true,
       'reports.basic': true,
+      'ticket.barcode': true,
       // Control: encendido
       'access.barrier': true,
       'lpr.camera': true,

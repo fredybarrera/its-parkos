@@ -13,6 +13,7 @@ export type ToggleCode =
   | 'payment.register'
   | 'occupancy.view'
   | 'reports.basic'
+  | 'ticket.barcode'
   // Solo Control
   | 'access.barrier'
   | 'lpr.camera'
@@ -67,7 +68,7 @@ export interface Plan {
 // ─────────────────────────────────────────────────────────────────────────
 
 export type SesionEstado = 'activa' | 'cerrada'
-export type SesionOrigen = 'manual' | 'lpr'
+export type SesionOrigen = 'manual' | 'lpr' | 'ticket'
 
 /** Un vehículo dentro del estacionamiento, desde que entra hasta que paga y sale. */
 export interface Sesion {
@@ -79,6 +80,8 @@ export interface Sesion {
   origen: SesionOrigen
   /** Se calcula al cerrar (registrarSalida); null mientras la sesión está activa. */
   monto: number | null
+  /** Código único del ticket de barras. Solo presente cuando origen === 'ticket'. */
+  ticketCode?: string
 }
 
 export type PlazaEstado = 'libre' | 'ocupada'

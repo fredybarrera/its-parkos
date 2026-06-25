@@ -12,7 +12,7 @@ const emit = defineEmits<{ salida: [sesionId: string] }>()
 const { has } = useEntitlements()
 const { getSesiones } = useParkingData()
 
-const mostrarOrigen = computed(() => has('lpr.camera'))
+const mostrarOrigen = computed(() => has('lpr.camera') || has('ticket.barcode'))
 
 const sesionesActivas = computed<Sesion[]>(() =>
   getSesiones()
@@ -55,7 +55,15 @@ function formatHora(iso: string): string {
 }
 
 function origenLabel(origen: Sesion['origen']): string {
-  return origen === 'lpr' ? 'LPR' : 'Manual'
+  if (origen === 'lpr') return 'LPR'
+  if (origen === 'ticket') return 'Ticket'
+  return 'Manual'
+}
+
+function origenClase(origen: Sesion['origen']): string {
+  if (origen === 'lpr') return 'bg-signal-50 text-signal-700'
+  if (origen === 'ticket') return 'bg-amber-50 text-amber-700'
+  return 'bg-asphalt-100 text-asphalt-600'
 }
 </script>
 
@@ -93,7 +101,7 @@ function origenLabel(origen: Sesion['origen']): string {
             <td v-if="mostrarOrigen" class="px-4 py-3">
               <span
                 class="rounded-full px-2 py-0.5 text-xs font-medium"
-                :class="sesion.origen === 'lpr' ? 'bg-signal-50 text-signal-700' : 'bg-asphalt-100 text-asphalt-600'"
+                :class="origenClase(sesion.origen)"
               >
                 {{ origenLabel(sesion.origen) }}
               </span>

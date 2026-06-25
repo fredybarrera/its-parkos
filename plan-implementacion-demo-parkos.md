@@ -297,7 +297,39 @@ Checklist:
 - [x] `/plazas` sigue funcionando igual que antes tras mover la simulación a `useSensoresSimulados`
 - [x] Las tablas nuevas respetan el mismo patrón responsivo de la Etapa 8 (`overflow-x-auto`, `flex-wrap`)
 - [x] Verificado con Playwright: estado bloqueado/desbloqueado por plan y crecimiento de la bitácora en el tiempo
-- [ ] Commit: `feat: bitácoras reales en lectura de patente, sensores y barreras` (pendiente — cambios en working tree, sin commitear aún)
+- [x] Commit: `feat: bitácoras reales en lectura de patente, sensores y barreras` (PR #2, mergeado a `main`)
+
+---
+
+## Etapa 10 — Ticket con código de barras (entrada y salida)
+
+**Objetivo:** tercer origen de sesión (`ticket`). El ingreso genera un ticket térmico con barcode CODE128; la salida acepta el código escaneado (o tipeado con Enter, compatible con pistola HID real). Funcionalidad `ticket.barcode` activa en Gestión **y** Control.
+
+Archivos nuevos/modificados:
+- `app/domain/types.ts` — `SesionOrigen` agrega `'ticket'`; `Sesion` agrega `ticketCode?`; `ToggleCode` agrega `'ticket.barcode'`
+- `app/domain/features.ts` — `'ticket.barcode'` en el catálogo (sección Núcleo)
+- `app/domain/plans.ts` — `'ticket.barcode': true` en **ambos** planes
+- `app/domain/ticket.ts` *(nuevo)* — `generarTicketCode(sesionId)` puro y testeable
+- `app/stores/parking.ts` — `registrarIngreso` asigna `ticketCode` cuando origen es `'ticket'`; nueva acción `buscarSesionPorTicket(code)`
+- `app/composables/useParkingData.ts` — contrato extendido con `buscarSesionPorTicket`
+- `app/components/operacion/TicketBarcode.vue` *(nuevo)* — modal de ticket térmico 58 mm con JsBarcode (client-only via `onMounted`)
+- `app/components/operacion/EscanearTicketSalida.vue` *(nuevo)* — input HID-compatible, Enter confirma, busca sesión y dispara flujo de salida existente
+- `app/components/operacion/IngresoManualForm.vue` — usa origen `'ticket'` cuando `has('ticket.barcode')`, muestra `TicketBarcode` tras confirmar
+- `app/components/operacion/SesionesTable.vue` — `mostrarOrigen` incluye `ticket.barcode`; badge ámbar para origen Ticket
+- `app/pages/operacion.vue` — monta `EscanearTicketSalida` cuando `has('ticket.barcode')`
+
+Checklist:
+- [x] `has('ticket.barcode') === true` en Gestión y en Control
+- [x] En el flujo de ingreso se genera un ticket con código de barras (CODE128) y se muestra imprimible (vista tipo recibo 58 mm)
+- [x] El barcode renderiza solo en cliente (no rompe el SSR)
+- [x] El `ticketCode` es un id único (NO la patente); la patente aparece como texto legible en el ticket
+- [x] El campo "Escanear ticket" confirma con Enter (compatible con pistola HID real)
+- [x] Escanear un código válido encuentra la sesión y dispara cobro + comprobante + salida, liberando la plaza
+- [x] Un código inválido muestra mensaje claro
+- [x] La sesión con ticket aparece en la misma tabla; Origen = 'Ticket' (badge ámbar)
+- [x] La acción "Salida" por fila sigue funcionando como alternativa
+- [x] Gating con `has('ticket.barcode')`; sin ifs por id de plan; datos vía `useParkingData`
+- [x] Commit: `feat: tickets con código de barras (origen ticket) en plan Gestión`
 
 ---
 

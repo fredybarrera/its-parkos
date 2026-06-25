@@ -23,6 +23,7 @@ export interface ParkingDataApi {
   getSesiones(): Sesion[]
   registrarIngreso(patente: string, origen: SesionOrigen): Sesion
   registrarSalida(sesionId: string): Comprobante
+  buscarSesionPorTicket(code: string): Sesion | null
   getPlazas(): Plaza[]
   setEstadoPlaza(plazaId: string, estado: PlazaEstado): void
   getAbonados(): Abonado[]
@@ -41,6 +42,7 @@ export function useParkingData(): ParkingDataApi {
     getSesiones: () => store.sesiones,
     registrarIngreso: (patente, origen) => store.registrarIngreso(patente, origen),
     registrarSalida: (sesionId) => store.registrarSalida(sesionId),
+    buscarSesionPorTicket: (code) => store.buscarSesionPorTicket(code),
     getPlazas: () => store.plazas,
     setEstadoPlaza: (plazaId, estado) => store.setEstadoPlaza(plazaId, estado),
     getAbonados: () => store.abonados,

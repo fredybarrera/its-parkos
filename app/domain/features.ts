@@ -17,6 +17,7 @@ export const FEATURES = {
   'payment.register': { code: 'payment.register', label: 'Registro de pago',          type: 'toggle' },
   'occupancy.view':   { code: 'occupancy.view',   label: 'Mapa de ocupación',         type: 'toggle' },
   'reports.basic':    { code: 'reports.basic',    label: 'Reportes básicos',          type: 'toggle' },
+  'ticket.barcode':   { code: 'ticket.barcode',   label: 'Ticket con código de barras', type: 'toggle' },
 
   // ── Límites ────────────────────────────────────────────────────────────
   'users.operators':  { code: 'users.operators',  label: 'Operadores',                type: 'limit'  },

@@ -22,6 +22,8 @@ const { comprobanteActivo, registrarSalida, cerrarComprobante } = useOperacionFl
 
     <OperacionAccesoAutomaticoPanel v-if="has('access.barrier')" />
 
+    <OperacionEscanearTicketSalida v-if="has('ticket.barcode')" />
+
     <OperacionSesionesTable @salida="registrarSalida" />
 
     <Transition

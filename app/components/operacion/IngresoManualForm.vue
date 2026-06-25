@@ -5,16 +5,22 @@
   sigue disponible (el operador siempre puede registrar a mano un caso que
   la cámara no captó), pero pasa a acción secundaria: la prop `primary` solo
   cambia el énfasis visual, nunca la disponibilidad.
+
+  Cuando has('ticket.barcode') está activo, el ingreso crea una sesión con
+  origen 'ticket' y muestra el TicketBarcode modal al confirmar.
 -->
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { Sesion } from '~/domain/types'
 
 withDefaults(defineProps<{ primary?: boolean }>(), { primary: true })
 
+const { has } = useEntitlements()
 const { registrarIngreso } = useParkingData()
 
 const abierto = ref(false)
 const patente = ref('')
+const sesionConTicket = ref<Sesion | null>(null)
 
 function abrir() {
   abierto.value = true
@@ -29,9 +35,20 @@ function cancelar() {
 function confirmar() {
   const valor = patente.value.trim().toUpperCase()
   if (!valor) return
-  registrarIngreso(valor, 'manual')
+
+  const origen = has('ticket.barcode') ? 'ticket' : 'manual'
+  const sesion = registrarIngreso(valor, origen)
+
+  if (has('ticket.barcode')) {
+    sesionConTicket.value = sesion
+  }
+
   abierto.value = false
   patente.value = ''
+}
+
+function cerrarTicket() {
+  sesionConTicket.value = null
 }
 </script>
 
@@ -76,5 +93,14 @@ function confirmar() {
         Cancelar
       </button>
     </div>
+
+    <!-- Modal del ticket (solo cuando ticket.barcode está activo) -->
+    <Teleport to="body">
+      <OperacionTicketBarcode
+        v-if="sesionConTicket"
+        :sesion="sesionConTicket"
+        @cerrar="cerrarTicket"
+      />
+    </Teleport>
   </div>
 </template>
