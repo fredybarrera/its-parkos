@@ -51,7 +51,7 @@ function isActive(item: NavItem): boolean {
 </script>
 
 <template>
-  <nav class="flex flex-col gap-1 p-3">
+  <nav class="flex h-full flex-col gap-1 p-3">
     <!-- Núcleo -->
     <NuxtLink
       v-for="item in coreItems"
@@ -98,5 +98,20 @@ function isActive(item: NavItem): boolean {
         {{ item.label }}
       </CommonFeatureLock>
     </template>
+
+    <!-- Crédito del desarrollador -->
+    <div class="mt-auto pt-4">
+      <div class="border-t border-asphalt-200 pt-3 text-center">
+        <a
+          href="https://www.itsgroup.dev/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex flex-col items-center gap-0.5 text-asphalt-400 transition-colors hover:text-asphalt-600"
+        >
+          <span class="text-[10px] uppercase tracking-widest">Desarrollado por</span>
+          <span class="text-xs font-semibold">IT Solutions Group</span>
+        </a>
+      </div>
+    </div>
   </nav>
 </template>

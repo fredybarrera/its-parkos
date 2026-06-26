@@ -163,7 +163,17 @@ const sesiones = [
           </button>
         </form>
 
-        <p class="mt-6 text-center text-xs text-asphalt-400">Demo comercial · ParkOS</p>
+        <div class="mt-6 border-t border-asphalt-100 pt-4 text-center">
+          <a
+            href="https://www.itsgroup.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex flex-col items-center gap-0.5 text-asphalt-400 transition-colors hover:text-asphalt-600"
+          >
+            <span class="text-[10px] uppercase tracking-widest">Desarrollado por</span>
+            <span class="text-xs font-semibold text-asphalt-600">IT Solutions Group</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
