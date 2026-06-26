@@ -42,33 +42,35 @@ function limpiarError() {
 
 <template>
   <section class="rounded-xl border border-asphalt-200 bg-white p-4">
-    <div class="flex flex-wrap items-center gap-4">
-      <!-- Ícono de escaneo -->
-      <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-asphalt-100">
-        <svg
-          class="h-5 w-5 text-asphalt-500"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M3 5v4M3 5h4M21 5v4M21 5h-4M3 19v-4M3 19h4M21 19v-4M21 19h-4" />
-          <line x1="7" y1="12" x2="17" y2="12" />
-          <line x1="12" y1="9" x2="12" y2="9.01" />
-          <line x1="12" y1="15" x2="12" y2="15.01" />
-        </svg>
-      </div>
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+      <!-- Ícono + etiquetas siempre en la misma fila -->
+      <div class="flex min-w-0 flex-1 items-center gap-3">
+        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-asphalt-100">
+          <svg
+            class="h-5 w-5 text-asphalt-500"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M3 5v4M3 5h4M21 5v4M21 5h-4M3 19v-4M3 19h4M21 19v-4M21 19h-4" />
+            <line x1="7" y1="12" x2="17" y2="12" />
+            <line x1="12" y1="9" x2="12" y2="9.01" />
+            <line x1="12" y1="15" x2="12" y2="15.01" />
+          </svg>
+        </div>
 
-      <div class="min-w-0 flex-1">
-        <p class="text-sm font-medium text-asphalt-800">Salida por escaneo de ticket</p>
-        <p class="text-xs text-asphalt-400">Escanea o ingresa el código y presiona Enter</p>
+        <div class="min-w-0">
+          <p class="text-sm font-medium text-asphalt-800">Salida por escaneo de ticket</p>
+          <p class="text-xs text-asphalt-400">Escanea o ingresa el código y presiona Enter</p>
+        </div>
       </div>
 
       <!-- Campo de escaneo -->
-      <div class="flex flex-wrap items-center gap-2">
+      <div class="flex items-center gap-2">
         <div class="relative">
           <input
             ref="inputRef"
