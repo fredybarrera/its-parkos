@@ -4,8 +4,8 @@
 -->
 <template>
   <div
-    class="flex min-h-screen items-center justify-center px-4"
-    style="background: radial-gradient(circle at 50% 35%, #2E2922 0%, #1C1812 70%);"
+    class="min-h-screen"
+    style="background: radial-gradient(circle at 30% 50%, #2E2922 0%, #1C1812 70%);"
   >
     <slot />
   </div>

@@ -10,7 +10,7 @@
 -->
 <script setup lang="ts">
 const { has } = useEntitlements()
-const { comprobanteActivo, registrarSalida, cerrarComprobante } = useOperacionFlujo()
+const { comprobanteActivo, iniciarSalida, confirmarSalida, cerrarComprobante } = useOperacionFlujo()
 </script>
 
 <template>
@@ -24,7 +24,7 @@ const { comprobanteActivo, registrarSalida, cerrarComprobante } = useOperacionFl
 
     <OperacionEscanearTicketSalida v-if="has('ticket.barcode')" />
 
-    <OperacionSesionesTable @salida="registrarSalida" />
+    <OperacionSesionesTable @iniciar-salida="iniciarSalida" />
 
     <Transition
       enter-active-class="transition-all duration-200 ease-out"
@@ -36,6 +36,8 @@ const { comprobanteActivo, registrarSalida, cerrarComprobante } = useOperacionFl
         v-if="comprobanteActivo"
         :comprobante="comprobanteActivo.comprobante"
         :hora-entrada="comprobanteActivo.horaEntrada"
+        :pendiente="comprobanteActivo.pendiente"
+        @confirmar="confirmarSalida"
         @cerrar="cerrarComprobante"
       />
     </Transition>

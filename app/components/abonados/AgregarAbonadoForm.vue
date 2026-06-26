@@ -4,29 +4,40 @@
   decide si renderiza este form o el aviso de límite alcanzado.
 -->
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const emit = defineEmits<{ agregar: [data: { nombre: string; patente: string }] }>()
 
 const abierto = ref(false)
 const nombre = ref('')
 const patente = ref('')
+const errorNombre = ref(false)
+const errorPatente = ref(false)
+
+watch(nombre, () => { errorNombre.value = false })
+watch(patente, () => { errorPatente.value = false })
 
 function abrir() {
   abierto.value = true
   nombre.value = ''
   patente.value = ''
+  errorNombre.value = false
+  errorPatente.value = false
 }
 
 function cancelar() {
   abierto.value = false
   nombre.value = ''
   patente.value = ''
+  errorNombre.value = false
+  errorPatente.value = false
 }
 
 function confirmar() {
   const nombreValor = nombre.value.trim()
   const patenteValor = patente.value.trim().toUpperCase()
+  errorNombre.value = !nombreValor
+  errorPatente.value = !patenteValor
   if (!nombreValor || !patenteValor) return
   emit('agregar', { nombre: nombreValor, patente: patenteValor })
   abierto.value = false
@@ -50,7 +61,10 @@ function confirmar() {
         type="text"
         placeholder="Nombre"
         autofocus
-        class="w-40 rounded-md border border-asphalt-300 px-2 py-1.5 text-sm text-asphalt-700 focus:border-signal-500 focus:outline-none"
+        class="w-40 rounded-md border px-2 py-1.5 text-sm text-asphalt-700 focus:outline-none focus:ring-2 transition-colors"
+        :class="errorNombre
+          ? 'border-2 border-brake-600 focus:border-brake-600 focus:ring-brake-600/20'
+          : 'border border-asphalt-300 focus:border-signal-500 focus:ring-signal-500/20'"
         @keyup.enter="confirmar"
         @keyup.esc="cancelar"
       />
@@ -58,7 +72,10 @@ function confirmar() {
         v-model="patente"
         type="text"
         placeholder="Patente"
-        class="w-28 rounded-md border border-asphalt-300 px-2 py-1.5 text-sm uppercase tracking-wide text-asphalt-700 focus:border-signal-500 focus:outline-none"
+        class="w-28 rounded-md border px-2 py-1.5 text-sm uppercase tracking-wide text-asphalt-700 focus:outline-none focus:ring-2 transition-colors"
+        :class="errorPatente
+          ? 'border-2 border-brake-600 focus:border-brake-600 focus:ring-brake-600/20'
+          : 'border border-asphalt-300 focus:border-signal-500 focus:ring-signal-500/20'"
         @keyup.enter="confirmar"
         @keyup.esc="cancelar"
       />

@@ -88,7 +88,7 @@ watch(tarifaVigente, (actual) => {
             type="number"
             min="0"
             step="50"
-            class="mt-1 w-full rounded-md border border-asphalt-300 px-3 py-2 text-sm text-asphalt-800 focus:border-signal-500 focus:outline-none"
+            class="mt-1 w-full rounded-md border border-asphalt-300 px-3 py-2 text-sm text-asphalt-800 focus:border-signal-500 focus:outline-none focus:ring-2 focus:ring-signal-500/20"
           />
         </label>
         <label class="block">
@@ -98,7 +98,7 @@ watch(tarifaVigente, (actual) => {
             type="number"
             min="1"
             step="1"
-            class="mt-1 w-full rounded-md border border-asphalt-300 px-3 py-2 text-sm text-asphalt-800 focus:border-signal-500 focus:outline-none"
+            class="mt-1 w-full rounded-md border border-asphalt-300 px-3 py-2 text-sm text-asphalt-800 focus:border-signal-500 focus:outline-none focus:ring-2 focus:ring-signal-500/20"
           />
         </label>
       </div>
@@ -111,7 +111,7 @@ watch(tarifaVigente, (actual) => {
             type="number"
             min="0"
             step="50"
-            class="mt-1 w-full rounded-md border border-asphalt-300 px-3 py-2 text-sm text-asphalt-800 focus:border-signal-500 focus:outline-none"
+            class="mt-1 w-full rounded-md border border-asphalt-300 px-3 py-2 text-sm text-asphalt-800 focus:border-signal-500 focus:outline-none focus:ring-2 focus:ring-signal-500/20"
           />
         </label>
       </div>

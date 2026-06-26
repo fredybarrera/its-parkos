@@ -7,6 +7,17 @@
 /* Quien pide menos movimiento, lo obtiene: corta animaciones/transiciones
    (incluye animate-pulse, transition-*, <Transition>) a casi cero sin
    tener que tocar cada componente uno por uno. */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

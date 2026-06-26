@@ -10,7 +10,7 @@
   origen 'ticket' y muestra el TicketBarcode modal al confirmar.
 -->
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import type { Sesion } from '~/domain/types'
 
 withDefaults(defineProps<{ primary?: boolean }>(), { primary: true })
@@ -20,21 +20,29 @@ const { registrarIngreso } = useParkingData()
 
 const abierto = ref(false)
 const patente = ref('')
+const error = ref(false)
 const sesionConTicket = ref<Sesion | null>(null)
+
+watch(patente, () => { error.value = false })
 
 function abrir() {
   abierto.value = true
   patente.value = ''
+  error.value = false
 }
 
 function cancelar() {
   abierto.value = false
   patente.value = ''
+  error.value = false
 }
 
 function confirmar() {
   const valor = patente.value.trim().toUpperCase()
-  if (!valor) return
+  if (!valor) {
+    error.value = true
+    return
+  }
 
   const origen = has('ticket.barcode') ? 'ticket' : 'manual'
   const sesion = registrarIngreso(valor, origen)
@@ -45,6 +53,7 @@ function confirmar() {
 
   abierto.value = false
   patente.value = ''
+  error.value = false
 }
 
 function cerrarTicket() {
@@ -74,7 +83,10 @@ function cerrarTicket() {
         type="text"
         placeholder="Patente"
         autofocus
-        class="w-32 rounded-md border border-asphalt-300 px-2 py-1.5 text-sm uppercase tracking-wide text-asphalt-700 focus:border-signal-500 focus:outline-none"
+        class="w-32 rounded-md border px-2 py-1.5 text-sm uppercase tracking-wide text-asphalt-700 focus:outline-none focus:ring-2 transition-colors"
+        :class="error
+          ? 'border-2 border-brake-600 focus:border-brake-600 focus:ring-brake-600/20'
+          : 'border border-asphalt-300 focus:border-signal-500 focus:ring-signal-500/20'"
         @keyup.enter="confirmar"
         @keyup.esc="cancelar"
       />

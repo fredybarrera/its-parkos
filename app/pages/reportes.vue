@@ -50,7 +50,7 @@ const comparativaOrigen = computed(() => {
 
     <section v-if="has('reports.basic')" class="space-y-4">
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <ReportesMetricCard label="Ingresos del día" :value="formatCLP(reporte.ingresosTotales)" />
+        <ReportesMetricCard variant="primary" label="Ingresos del día" :value="formatCLP(reporte.ingresosTotales)" />
         <ReportesMetricCard label="Vehículos atendidos" :value="String(reporte.vehiculosAtendidos)" />
         <ReportesMetricCard label="Rotación" :value="`${reporte.rotacion}x`" hint="Sesiones por plaza" />
         <ReportesMetricCard label="Ocupación promedio" :value="`${reporte.ocupacionPromedio}%`" />

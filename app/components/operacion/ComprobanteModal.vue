@@ -11,9 +11,10 @@ import type { Comprobante } from '~/domain/types'
 defineProps<{
   comprobante: Comprobante
   horaEntrada: string
+  pendiente?: boolean
 }>()
 
-defineEmits<{ cerrar: [] }>()
+defineEmits<{ cerrar: []; confirmar: [] }>()
 
 function formatHora(iso: string): string {
   return new Date(iso).toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' })
@@ -35,8 +36,28 @@ function formatTiempo(minutos: number): string {
     <div class="w-full max-w-xs rounded-lg bg-white shadow-xl">
       <div class="px-6 pt-6">
         <div class="flex items-center gap-2">
-          <div class="flex h-9 w-9 items-center justify-center rounded-full bg-signal-50 text-signal-600">
+          <div
+            class="flex h-9 w-9 items-center justify-center rounded-full"
+            :class="pendiente ? 'bg-hazard-50 text-hazard-600' : 'bg-signal-50 text-signal-600'"
+          >
+            <!-- Ícono de cobro pendiente -->
             <svg
+              v-if="pendiente"
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="2" y="5" width="20" height="14" rx="2" />
+              <line x1="2" y1="10" x2="22" y2="10" />
+            </svg>
+            <!-- Ícono de salida confirmada -->
+            <svg
+              v-else
               class="h-5 w-5"
               viewBox="0 0 24 24"
               fill="none"
@@ -50,9 +71,11 @@ function formatTiempo(minutos: number): string {
             </svg>
           </div>
           <div>
-            <h2 class="text-lg font-semibold text-asphalt-800">Salida registrada</h2>
+            <h2 class="text-lg font-semibold text-asphalt-800">
+              {{ pendiente ? 'Monto a cobrar' : 'Salida registrada' }}
+            </h2>
             <p class="font-mono text-[11px] uppercase tracking-wide text-asphalt-400">
-              Boleta · {{ comprobante.id.slice(-6) }}
+              {{ pendiente ? comprobante.patente : `Boleta · ${comprobante.id.slice(-6)}` }}
             </p>
           </div>
         </div>
@@ -84,7 +107,24 @@ function formatTiempo(minutos: number): string {
       </dl>
 
       <div class="px-6 pb-6 pt-5">
+        <div v-if="pendiente" class="flex flex-col gap-2">
+          <button
+            type="button"
+            class="flex-1 rounded-lg border border-asphalt-300 px-4 py-2 text-sm font-medium text-asphalt-700 transition-colors hover:bg-asphalt-100"
+            @click="$emit('cerrar')"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            class="flex-1 rounded-lg bg-signal-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-signal-700"
+            @click="$emit('confirmar')"
+          >
+            Confirmar cobro
+          </button>
+        </div>
         <button
+          v-else
           type="button"
           class="w-full rounded-lg bg-signal-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-signal-700"
           @click="$emit('cerrar')"

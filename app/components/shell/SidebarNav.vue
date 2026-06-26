@@ -68,7 +68,11 @@ function isActive(item: NavItem): boolean {
       {{ item.label }}
     </NuxtLink>
 
-    <hr class="my-2 border-asphalt-200" />
+    <div class="my-2 flex items-center gap-2">
+      <hr class="flex-1 border-asphalt-200" />
+      <span class="text-[10px] font-semibold uppercase tracking-widest text-asphalt-400">Funcionalidades</span>
+      <hr class="flex-1 border-asphalt-200" />
+    </div>
 
     <!-- Gated: navegable si está desbloqueado, con candado si no -->
     <template v-for="item in gatedItems" :key="item.to">
@@ -78,8 +82,8 @@ function isActive(item: NavItem): boolean {
         class="rounded-lg px-3 py-2 text-sm font-medium transition-colors"
         :class="
           isActive(item)
-            ? 'bg-signal-50 text-signal-700'
-            : 'text-asphalt-600 hover:bg-asphalt-100 hover:text-asphalt-900'
+            ? 'border-l-2 border-signal-600 bg-signal-50 text-signal-700'
+            : 'border-l-2 border-transparent text-asphalt-600 hover:bg-asphalt-100 hover:text-asphalt-900'
         "
         @click="emit('navigate')"
       >

@@ -146,30 +146,23 @@ function imprimir() {
 
 <style>
 @media print {
-  .ticket-modal-overlay {
-    position: static !important;
-    background: none !important;
-    display: block !important;
-    padding: 0 !important;
+  /* Ocultar todo el body; solo el área del ticket será visible */
+  body * {
+    visibility: hidden !important;
   }
 
-  .ticket-modal-overlay > div {
-    display: block !important;
+  .ticket-print-area,
+  .ticket-print-area * {
+    visibility: visible !important;
   }
 
   .ticket-print-area {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
     width: 58mm !important;
-    margin: 0 auto !important;
     box-shadow: none !important;
-  }
-
-  .ticket-actions {
-    display: none !important;
-  }
-
-  /* Ocultar todo lo que no sea el modal del ticket */
-  body > *:not(#__nuxt) {
-    display: none !important;
+    margin: 0 !important;
   }
 }
 </style>

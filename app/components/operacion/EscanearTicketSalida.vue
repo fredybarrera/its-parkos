@@ -10,7 +10,7 @@
 import { ref } from 'vue'
 
 const { buscarSesionPorTicket } = useParkingData()
-const { registrarSalida } = useOperacionFlujo()
+const { iniciarSalida } = useOperacionFlujo()
 
 const codigo = ref('')
 const error = ref<string | null>(null)
@@ -18,7 +18,10 @@ const inputRef = ref<HTMLInputElement | null>(null)
 
 function confirmar() {
   const code = codigo.value.trim().toUpperCase()
-  if (!code) return
+  if (!code) {
+    error.value = 'Ingresa o escanea el código del ticket.'
+    return
+  }
 
   error.value = null
   const sesion = buscarSesionPorTicket(code)
@@ -28,7 +31,7 @@ function confirmar() {
     return
   }
 
-  registrarSalida(sesion.id)
+  iniciarSalida(sesion.id)
   codigo.value = ''
 }
 
@@ -76,8 +79,8 @@ function limpiarError() {
             class="w-36 rounded-lg border px-3 py-1.5 font-mono text-sm uppercase tracking-widest transition-colors focus:outline-none"
             :class="
               error
-                ? 'border-red-400 bg-red-50 text-red-700 focus:border-red-500'
-                : 'border-asphalt-300 bg-white text-asphalt-800 focus:border-signal-500'
+                ? 'border-2 border-brake-600 bg-brake-50 text-brake-700 focus:border-brake-600 focus:ring-2 focus:ring-brake-600/20'
+                : 'border border-asphalt-300 bg-white text-asphalt-800 focus:border-signal-500 focus:ring-2 focus:ring-signal-500/20'
             "
             @keyup.enter="confirmar"
             @input="limpiarError"
@@ -102,7 +105,7 @@ function limpiarError() {
     >
       <p
         v-if="error"
-        class="mt-3 flex items-center gap-1.5 rounded-lg bg-red-50 px-3 py-2 text-xs font-medium text-red-700"
+        class="mt-3 flex items-center gap-1.5 rounded-lg bg-brake-50 px-3 py-2 text-xs font-medium text-brake-700"
       >
         <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="10" />
